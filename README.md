@@ -1,6 +1,9 @@
-<<<<<<< HEAD
 # pharmacy-blog
-=======
+
+# =======
+
+> > > > > > > 800985f169851fe16090a4fc5984370905e92d51
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -71,4 +74,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> 800985f169851fe16090a4fc5984370905e92d51
+<<<<<<< HEAD
+
+> > > > > > > # 800985f169851fe16090a4fc5984370905e92d51
+> > > > > > >
+> > > > > > > 800985f169851fe16090a4fc5984370905e92d51

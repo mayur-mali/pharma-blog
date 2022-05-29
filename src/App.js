@@ -5,9 +5,7 @@ import Blogs from "./pages/Blogs";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
-//import SingleBlog from "./pages/SingleBlog";
-import CreatePost from "./pages/CreatePost";
-import CreateNewPostBtn from "./components/general/CreateNewPostBtn";
+import SingleBlog from "./pages/SingleBlog";
 
 function App() {
   //const currentUser = false;
@@ -22,9 +20,6 @@ function App() {
         <div>
           <Navbar />
         </div>
-        <RequireAuth>
-          <CreateNewPostBtn />
-        </RequireAuth>
         {children}
       </div>
     );
@@ -47,16 +42,6 @@ function App() {
             <Layout1>
               <RequireAuth>
                 <Blogs />
-              </RequireAuth>
-            </Layout1>
-          }
-        />
-        <Route
-          path="/createpost"
-          element={
-            <Layout1>
-              <RequireAuth>
-                <CreatePost />
               </RequireAuth>
             </Layout1>
           }
