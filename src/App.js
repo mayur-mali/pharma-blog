@@ -6,6 +6,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import SingleBlog from "./pages/SingleBlog";
+import CreatePost from "./pages/CreatePost";
 
 function App() {
   //const currentUser = false;
@@ -45,7 +46,9 @@ function App() {
               </RequireAuth>
             </Layout1>
           }
-        />
+        ></Route>
+        <Route path="/blogs/:blogsId" element={<SingleBlog />} />
+        <Route path="/createpost" element={<CreatePost />} />
       </Routes>
     </div>
   );

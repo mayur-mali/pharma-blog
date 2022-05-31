@@ -8,3 +8,10 @@
 body {
   font-family: "Inter", sans-serif;
 }
+
+.sun-editor .se-wrapper .se-placeholder {
+  font-size: 1.125rem !important;
+}
+.sun-editor-editable {
+  font-size: 1.125rem !important;
+}
