@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
-import {
-  doc,
-  getDocs,
-  query,
-  where,
-  onSnapshot,
-  collection,
-} from "firebase/firestore";
+import { query, where, onSnapshot, collection } from "firebase/firestore";
 
 //import { list } from "postcss";
 export default function SingleBlog() {
@@ -31,7 +24,7 @@ export default function SingleBlog() {
         console.log("No documents found with given slug");
       }
     });
-  }, []);
+  }, [blogsId]);
 
   return (
     <div>

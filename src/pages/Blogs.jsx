@@ -3,16 +3,14 @@ import useTitle from "../customhooks/useTitle";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { Link } from "react-router-dom";
-import slugify from "slugify";
-
-//import jsxToString from "jsx-to-string";
 
 export default function Blogs() {
   var slugify = require("slugify");
   const [postData, setPostData] = useState([]);
-  const [data, setData] = useState([]);
+
   const [logding, setLoding] = useState(true);
   const postsCollectionRef = collection(db, "posts");
+  // eslint-disable-next-line no-unused-vars
   function createMarkup(content) {
     return { __html: content };
   }
@@ -29,13 +27,13 @@ export default function Blogs() {
       }
     };
     getPost();
-  }, [postData]);
+  }, [postsCollectionRef]);
 
   const handleDelete = async (id) => {
     setLoding(true);
     try {
       await deleteDoc(doc(db, "posts", id));
-      setPostData(data.filter((item) => item.id !== id));
+      setPostData(postData.filter((item) => item.id !== id));
       setLoding(false);
       //console.log(id);
     } catch (err) {
@@ -43,7 +41,7 @@ export default function Blogs() {
       console.log(err);
     }
   };
-  //console.log(postData);
+
   return (
     <div className="text-black">
       Blogs
