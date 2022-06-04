@@ -25,7 +25,7 @@ export default function Footer() {
               type="email"
               name="emailAddress"
               id="emailAddress"
-              autocomplete="email"
+              autoComplete="email"
               required=""
               className="appearance-none min-w-0 w-full bg-white border border-gray-300 py-2 px-4 text-base rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:placeholder-gray-400 sm:max-w-xs"
               placeholder="Enter your email"
@@ -119,7 +119,7 @@ export default function Footer() {
             </a>
           </div>
           <p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
-            © 2022 HRPIPER, Inc. All rights reserved. MADE WITH{" "}
+            © 2022 HRPIPER, Inc. All rights reserved. MADE WITH
             <span className="text-red-500 text-xl">&#9829;</span> BY MAYUR
           </p>
         </div>
