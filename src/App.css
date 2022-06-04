@@ -15,3 +15,7 @@ body {
 .sun-editor-editable {
   font-size: 1.125rem !important;
 }
+
+.content-img img {
+  display: none !important;
+}

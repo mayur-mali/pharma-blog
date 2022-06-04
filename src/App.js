@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import SingleBlog from "./pages/SingleBlog";
 import CreatePost from "./pages/CreatePost";
+import Footer from "./components/general/Footer";
 
 function App() {
   //const currentUser = false;
@@ -22,6 +23,9 @@ function App() {
           <Navbar />
         </div>
         {children}
+        <>
+          <Footer />
+        </>
       </div>
     );
   };

@@ -3,8 +3,18 @@ import useTitle from "../customhooks/useTitle";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import HeroSection from "../components/herosection/HeroSection";
+import FeaturedPost from "../components/herosection/FeaturedPost";
+import TrendingPost from "../components/herosection/TrendingPost";
+import TodaysHighlight from "../components/herosection/TodaysHighlight";
+import SectionsTitle from "../components/general/SectionsTitle";
+import MostRecentPost from "../components/herosection/MostRecentPost";
 
 export default function Blogs() {
+  var relativeTime = require("dayjs/plugin/relativeTime");
+  dayjs.extend(relativeTime);
+  const data = [1, 23, 45, 13, 15, 46];
   var slugify = require("slugify");
   const [postData, setPostData] = useState([]);
 
@@ -43,31 +53,25 @@ export default function Blogs() {
   };
 
   return (
-    <div className="text-black">
-      Blogs
-      {logding ? (
-        <p>loding...........</p>
-      ) : (
-        <div>
-          {postData.map((post) => (
-            <div key={post.id}>
-              <Link to={slugify(post.title, { lower: true })}>
-                {post.title}
-              </Link>
-              <div onClick={() => handleDelete(post.id)}>X</div>
-            </div>
-          ))}
+    <>
+      <HeroSection />
+      <div className="grid lg:grid-cols-12 px-6 grid-cols-1 gap-8 py-10 max-w-7xl mx-auto w-full">
+        <div className="lg:col-span-9 col-span-1">
+          <FeaturedPost data={postData} />
         </div>
-      )}
-    </div>
+        <div className="lg:col-span-3  col-span-1">
+          {/*<TrendingPost />*/}
+          <div className="sticky top-0">
+            <TrendingPost data={data} />
+          </div>
+        </div>
+      </div>
+      <div className="py-10 max-w-7xl px-6 mx-auto w-full">
+        <TodaysHighlight />
+      </div>
+      <div className="py-10 px-6 max-w-7xl mx-auto w-full">
+        <MostRecentPost />
+      </div>
+    </>
   );
-}
-
-// eslint-disable-next-line no-lone-blocks
-{
-  /*<div
-            className="p-6 mt-4"
-            dangerouslySetInnerHTML={createMarkup(post.content)}
-            key={post.id}
-          ></div>*/
 }

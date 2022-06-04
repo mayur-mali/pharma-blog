@@ -23,12 +23,12 @@ function Navbar() {
   };
 
   return (
-    <div className="h-24 absolute top-0 md:px-8 px-4 py-2 bg-slate-900 w-full">
-      <div className="flex h-full md:flex-row flex-col justify-between md:items-center">
-        <h3 className="text-white font-bold text-xl capitalize">
+    <div className="h-20 absolute top-0 md:px-8 px-4 py-2 bg-white shadow-md  w-full">
+      <div className="flex h-full max-w-7xl w-full mx-auto md:flex-row flex-col justify-between md:items-center">
+        <h3 className="text-black font-bold text-xl capitalize">
           pharmacy blog
         </h3>
-        <div className="text-white  w-56 font-bold text-sm capitalize">
+        <div className="text-black  w-56 font-bold text-sm capitalize">
           {currentUser ? (
             <div className="w-32 flex items-center justify-between">
               <p>{currentUser.displayName}</p>
