@@ -30,12 +30,10 @@ export default function SingleBlog() {
     <div>
       SingleBlog
       {data.map((post) => (
-        <>
-          <h1 key={post.id} className="font-bold text-4xl">
-            {post.title}
-          </h1>
+        <div key={post.id}>
+          <h1 className="font-bold text-4xl">{post.title}</h1>
           <div className="mt-8">{post.content}</div>
-        </>
+        </div>
       ))}
       <div dangerouslySetInnerHTML={createMarkup(data.content)}></div>
     </div>
