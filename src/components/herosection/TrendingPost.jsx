@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import SectionsTitle from "../general/SectionsTitle";
 
-export default function TrendingPost(props) {
+export default function TrendingPost() {
+  const [data, setData] = useState([1, 2, 3, 5, 8, 9, 5]);
   return (
     <>
       <SectionsTitle title="Trending post" />
 
-      {props.data.map((post, index) => (
+      {data.map((post, index) => (
         <div
           className="flex text-black py-8  pr-2  border-b-[1px] border-gray-300"
           key={index}

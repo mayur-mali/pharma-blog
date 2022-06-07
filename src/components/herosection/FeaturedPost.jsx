@@ -1,22 +1,39 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import SectionsTitle from "../general/SectionsTitle";
 
-export default function FeaturedPost(props) {
-  //console.log(title);
-  const [data, setdata] = useState([1, 2, 3, 4, 5, 6, 8, 6, 9, 10, 14, 65]);
+export default function FeaturedPost() {
+  const [postData, setPostData] = useState([]);
+  const [logding, setLoding] = useState(true);
+  useEffect(() => {
+    setLoding(true);
+    const getPost = async () => {
+      try {
+        const data = await axios.get("/posts");
+        setPostData(data.data);
+        setLoding(false);
+      } catch (error) {
+        console.error(error);
+        setLoding(false);
+      }
+    };
+    getPost();
+  }, []);
   return (
     <div>
       <SectionsTitle title="featured post" />
       <div className="grid lg:grid-cols-4 mt-8 grid-cols-1 gap-5">
-        {data.map((post, index) => (
+        {postData.map((post, index) => (
           <div className="lg:col-span-2 col-span-1 flex text-black" key={index}>
             <div className="flex-none w-28 h-28 md:w-36 md:h-36 rounded-xl bg-slate-300 mr-4"></div>
             <div className="flex flex-col py-2 pr-2 justify-between space-y-2">
-              <h3 className="md:text-lg text-sm font-bold capitalize line-clamp-2">
-                Here are a few tips that will help you to get started about
-                lifestyle
-              </h3>
-              <h5 className="md:text-sm text-xs">Author @ {}</h5>
+              <Link to={`/post/${post.slug}`}>
+                <h3 className="md:text-lg text-sm font-bold capitalize line-clamp-2">
+                  {post.title}
+                </h3>
+              </Link>
+              <h5 className="md:text-sm text-xs">Author @ {post.username}</h5>
             </div>
           </div>
         ))}

@@ -51,7 +51,7 @@ function App() {
             </Layout1>
           }
         ></Route>
-        <Route path="/blogs/:blogsId" element={<SingleBlog />} />
+        <Route path="/post/:slug" element={<SingleBlog />} />
         <Route path="/createpost" element={<CreatePost />} />
       </Routes>
     </div>

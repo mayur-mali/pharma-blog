@@ -2,34 +2,41 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import { query, where, onSnapshot, collection } from "firebase/firestore";
+import axios from "axios";
+import useTitle from "../customhooks/useTitle";
 
 //import { list } from "postcss";
 export default function SingleBlog() {
   function createMarkup(content) {
     return { __html: content };
   }
-  const { blogsId } = useParams();
-  // const docRef =  doc(db, "cities", "SF");
-  // const docSnap = getDoc(docRef);
-  const [data, setData] = useState([]);
+  const { slug } = useParams();
 
+  const [data, setData] = useState([]);
+  useTitle(slug);
   useEffect(() => {
-    const q = query(collection(db, "posts"), where("slug", "==", blogsId));
-    onSnapshot(q, (snap) => {
-      if (!snap.empty) {
-        const data = snap.docs[0].data();
-        setData(data);
-        //console.log(data);
-      } else {
-        console.log("No documents found with given slug");
+    const getPost = async () => {
+      try {
+        const data = await axios.get("/posts/" + slug);
+        setData(data.data);
+      } catch (error) {
+        console.error(error);
       }
-    });
-  }, [blogsId]);
+    };
+    getPost();
+  }, [slug]);
 
   return (
     <div>
       SingleBlog
-      {data.title}
+      {data.map((post) => (
+        <>
+          <h1 key={post.id} className="font-bold text-4xl">
+            {post.title}
+          </h1>
+          <div className="mt-8">{post.content}</div>
+        </>
+      ))}
       <div dangerouslySetInnerHTML={createMarkup(data.content)}></div>
     </div>
   );
