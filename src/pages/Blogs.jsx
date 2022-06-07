@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useTitle from "../customhooks/useTitle";
 
 import dayjs from "dayjs";
-import HeroSection from "../components/herosection/HeroSection";
+import SearchAndFilterSection from "../components/herosection/SearchAndFilterSection";
 import FeaturedPost from "../components/herosection/FeaturedPost";
 import TrendingPost from "../components/herosection/TrendingPost";
 import TodaysHighlight from "../components/herosection/TodaysHighlight";
@@ -21,7 +21,7 @@ export default function Blogs() {
 
   return (
     <>
-      <HeroSection />
+      <SearchAndFilterSection />
       <div className="grid lg:grid-cols-12 px-6 grid-cols-1 gap-8 py-10 max-w-7xl mx-auto w-full">
         <div className="lg:col-span-9 col-span-1">
           <FeaturedPost />

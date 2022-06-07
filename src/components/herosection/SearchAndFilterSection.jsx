@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-export default function HeroSection() {
+export default function SearchAndFilterSection() {
   return (
     <div>
       <div className="w-full font-workSans py-8 px-4 space-y-6 mx-auto max-w-7xl">
