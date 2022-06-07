@@ -2,43 +2,41 @@ import React, { useState } from "react";
 // import CreateNewPostBtn from "../components/general/CreateNewPostBtn";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db, auth } from "../../firebase";
+
 import { useNavigate } from "react-router-dom";
-import slugify from "slugify";
 
 export default function Suneditor(props) {
   const [content, setContent] = useState("");
   const [openTab, setOpenTab] = React.useState(1);
   const [loding, setLoding] = useState(false);
-  const postsCollectionRef = collection(db, "posts");
+
   const handleOnChange = (editorContent) => setContent(editorContent);
   function createMarkup() {
     return { __html: content };
   }
   //console.log(content);
   const nevigate = useNavigate();
-  const createPost = async () => {
-    setLoding(true);
-    const slug = slugify(props.title, { lower: true });
-    try {
-      await addDoc(postsCollectionRef, {
-        title: props.title,
-        slug,
-        content,
-        author: {
-          name: auth.currentUser.displayName,
-          id: auth.currentUser.uid,
-          imgurl: auth.currentUser.photoURL,
-        },
-        createAt: serverTimestamp(),
-      });
-      setTimeout(() => {
-        setLoding(false);
-      }, 3000).then(nevigate("/blogs"));
-    } catch (error) {}
-    //console.log("sent..", postsCollectionRef);
-  };
+  // const createPost = async () => {
+  //   setLoding(true);
+  //   const slug = slugify(props.title, { lower: true });
+  //   try {
+  //     await addDoc(postsCollectionRef, {
+  //       title: props.title,
+  //       slug,
+  //       content,
+  //       author: {
+  //         name: auth.currentUser.displayName,
+  //         id: auth.currentUser.uid,
+  //         imgurl: auth.currentUser.photoURL,
+  //       },
+  //       createAt: serverTimestamp(),
+  //     });
+  //     setTimeout(() => {
+  //       setLoding(false);
+  //     }, 3000).then(nevigate("/blogs"));
+  //   } catch (error) {}
+  //   //console.log("sent..", postsCollectionRef);
+  // };
   return (
     <>
       <div className="my-5 text-right space-x-3">
@@ -107,7 +105,7 @@ export default function Suneditor(props) {
         {content.length > 20 && (
           <button
             className="px-4 py-2 md:w-56 w-full text-white bg-green-500 font-bold"
-            onClick={() => createPost()}
+            onClick={() => console.log("hello world")}
           >
             {loding ? <span>posting...</span> : <span> publish</span>}
           </button>

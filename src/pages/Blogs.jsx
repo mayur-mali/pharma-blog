@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useTitle from "../customhooks/useTitle";
 
-import dayjs from "dayjs";
 import SearchAndFilterSection from "../components/herosection/SearchAndFilterSection";
 import FeaturedPost from "../components/herosection/FeaturedPost";
 import TrendingPost from "../components/herosection/TrendingPost";
@@ -10,13 +9,6 @@ import TodaysHighlight from "../components/herosection/TodaysHighlight";
 import MostRecentPost from "../components/herosection/MostRecentPost";
 
 export default function Blogs() {
-  var relativeTime = require("dayjs/plugin/relativeTime");
-  dayjs.extend(relativeTime);
-
-  // eslint-disable-next-line no-unused-vars
-  function createMarkup(content) {
-    return { __html: content };
-  }
   useTitle("blogs");
 
   return (

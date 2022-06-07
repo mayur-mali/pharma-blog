@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase";
+
 import { useNavigate } from "react-router-dom";
+import { googleLogout } from "@react-oauth/google";
 
 import { IoIosLogOut } from "react-icons/io";
 function Navbar() {
@@ -10,16 +10,11 @@ function Navbar() {
   const { dispatch } = useContext(AuthContext);
   const nevigate = useNavigate();
 
-  const hadleGoogleSignout = () => {
-    signOut(auth)
-      .then(() => {
-        dispatch({ type: "LOGOUT" });
-        localStorage.clear();
-        nevigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const logout = () => {
+    googleLogout();
+    dispatch({ type: "LOGOUT" });
+    localStorage.clear();
+    nevigate("/");
   };
 
   return (
@@ -31,10 +26,10 @@ function Navbar() {
         <div className="text-black  w-56 font-bold text-sm capitalize">
           {currentUser ? (
             <div className="w-32 flex items-center justify-between">
-              <p>{currentUser.displayName}</p>
+              <p>{currentUser.name}</p>
               <IoIosLogOut
                 className="text-xl font-bold cursor-pointer"
-                onClick={() => hadleGoogleSignout()}
+                onClick={() => logout()}
               />
             </div>
           ) : (
