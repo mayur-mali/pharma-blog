@@ -46,11 +46,11 @@ export default function SingleBlog() {
   // }, [data]);
 
   return (
-    <div className="w-full py-4 bg-gray-100">
-      <div className="max-w-6xl rounded-md bg-white mx-auto w-full  ">
+    <div className="w-full  py-8 bg-[#f5f5f5]">
+      <div className="max-w-6xl p-4 md:rounded-xl bg-white mx-auto w-full">
         <Breadcrumbs data={data} />
-        <div className="grid lg:grid-cols-4 grid-cols-1">
-          <div className="lg:col-span-3 px-4 col-span-1 text-black ">
+        <div className="grid lg:grid-cols-4 px-4 gap-6 grid-cols-1">
+          <div className="lg:col-span-3 col-span-1 text-black ">
             {data.map((post) => (
               <div key={post._id}>
                 <div className="w-full mb-4 h-80 relative">
@@ -95,7 +95,7 @@ export default function SingleBlog() {
             ))}
             <Discussion user={currentUser} />
           </div>
-          <div className="bg-blue-300 sticky top-0 col-span-1 min-w-md w-full h-96"></div>
+          <div className="bg-gray-100 sticky top-0 col-span-1 min-w-md w-full h-64"></div>
         </div>
       </div>
     </div>

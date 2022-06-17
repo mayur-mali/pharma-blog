@@ -21,31 +21,7 @@ export default function SearchAndFilterSection() {
             Lorem ipsum dolor sit, amet consectetur adipisicing.
           </p>
         </div>
-        <div className="max-w-md mx-auto text-black rounded-xl px-4 flex space-x-3 justify-between items-center shadow dark:bg-slate-700 bg-gray-200 py-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-          <input
-            type="text"
-            onChange={(e) => console.log(e.target.value)}
-            className="w-full py-1 focus:outline-none bg-transparent text-black"
-            placeholder="search...."
-          />
-          <button className="md:px-6 px-4 py-1 md:py-2 dark:bg-white dark:text-black bg-blue-500 text-white font-bold rounded-xl">
-            Go!
-          </button>
-        </div>
+
         <div className="max-w-5xl flex flex-col justify-center items-center space-y-9 w-full mx-auto">
           <h2 className="flex text-black items-center text-2xl text-center font-bold">
             <svg
