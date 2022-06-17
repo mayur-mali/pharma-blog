@@ -4,6 +4,9 @@ import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Suneditor(props) {
   const [content, setContent] = useState("");
@@ -16,27 +19,25 @@ export default function Suneditor(props) {
   }
   //console.log(content);
   const nevigate = useNavigate();
-  // const createPost = async () => {
-  //   setLoding(true);
-  //   const slug = slugify(props.title, { lower: true });
-  //   try {
-  //     await addDoc(postsCollectionRef, {
-  //       title: props.title,
-  //       slug,
-  //       content,
-  //       author: {
-  //         name: auth.currentUser.displayName,
-  //         id: auth.currentUser.uid,
-  //         imgurl: auth.currentUser.photoURL,
-  //       },
-  //       createAt: serverTimestamp(),
-  //     });
-  //     setTimeout(() => {
-  //       setLoding(false);
-  //     }, 3000).then(nevigate("/blogs"));
-  //   } catch (error) {}
-  //   //console.log("sent..", postsCollectionRef);
-  // };
+  const { currentUser } = useContext(AuthContext);
+  const createPost = async () => {
+    setLoding(true);
+    try {
+      await axios.post("/posts/", {
+        title: props.title,
+        content,
+        author: {
+          name: currentUser.name,
+          imgurl: currentUser.picture,
+        },
+      });
+      setTimeout(() => {
+        setLoding(false);
+        nevigate("/blogs");
+      }, 2000);
+    } catch (error) {}
+    //console.log("sent..", postsCollectionRef);
+  };
   return (
     <>
       <div className="my-5 text-right space-x-3">
@@ -105,7 +106,7 @@ export default function Suneditor(props) {
         {content.length > 20 && (
           <button
             className="px-4 py-2 md:w-56 w-full text-white bg-green-500 font-bold"
-            onClick={() => console.log("hello world")}
+            onClick={() => createPost()}
           >
             {loding ? <span>posting...</span> : <span> publish</span>}
           </button>

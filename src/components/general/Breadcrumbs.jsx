@@ -5,7 +5,7 @@ export default function Breadcrumbs(props) {
   return (
     <>
       <div className="bg-white">
-        <div className="py-12  lg:py-24">
+        <div className="py-8 px-4  lg:py-10">
           <nav className="flex" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-4">
               <li>
@@ -55,13 +55,14 @@ export default function Breadcrumbs(props) {
                   >
                     <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"></path>
                   </svg>
-                  <Link
-                    to={props.slug}
-                    aria-current="page"
-                    className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
-                  >
-                    {props.slug}
-                  </Link>
+                  {props.data.map((data, index) => (
+                    <h3
+                      className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                      key={index}
+                    >
+                      {data.title}
+                    </h3>
+                  ))}
                 </div>
               </li>
             </ol>

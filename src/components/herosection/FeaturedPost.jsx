@@ -29,7 +29,7 @@ export default function FeaturedPost() {
   return (
     <div>
       <SectionsTitle title="featured post" />
-      <div className="grid lg:grid-cols-4 mt-8 grid-cols-1 gap-5">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 mt-8 grid-cols-1 gap-5">
         {postData.map((post, index) => (
           <div className="lg:col-span-2 col-span-1 flex text-black" key={index}>
             {loading ? (
@@ -50,7 +50,14 @@ export default function FeaturedPost() {
                     </h3>
                   </Link>
                   <h5 className="md:text-sm text-xs">
-                    Author @ {post.username}
+                    Author @ {post.author.map((author) => author.name)} |
+                    <span className="text-xs ml-1">
+                      <span className="mr-1">Posted on</span>
+                      {dayjs(post.createdAt).format("DD/MM/YYYY")} |
+                      <span className="ml-1">
+                        {dayjs(post.createdAt).fromNow()}
+                      </span>
+                    </span>
                   </h5>
                 </div>
               </>

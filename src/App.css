@@ -12,10 +12,19 @@ body {
 .sun-editor .se-wrapper .se-placeholder {
   font-size: 1.125rem !important;
 }
-.sun-editor-editable {
-  font-size: 1.125rem !important;
-}
 
 .content-img img {
   display: none !important;
+}
+
+.table-wrapper-paragraph {
+  overflow-y: auto !important;
+}
+
+.se-image-container {
+  width: 100% !important;
+}
+
+.se-image-container img {
+  border-radius: 20px;
 }

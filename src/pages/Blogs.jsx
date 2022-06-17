@@ -7,6 +7,8 @@ import TrendingPost from "../components/herosection/TrendingPost";
 import TodaysHighlight from "../components/herosection/TodaysHighlight";
 
 import MostRecentPost from "../components/herosection/MostRecentPost";
+import CreateNewPostBtn from "../components/general/CreateNewPostBtn";
+import { useEffect } from "react";
 
 export default function Blogs() {
   useTitle("blogs");
@@ -31,6 +33,7 @@ export default function Blogs() {
       <div className="py-10 px-6 max-w-7xl mx-auto w-full">
         <MostRecentPost />
       </div>
+      <CreateNewPostBtn />
     </>
   );
 }
