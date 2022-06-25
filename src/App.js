@@ -18,7 +18,7 @@ function App() {
 
   const Layout1 = ({ children }) => {
     return (
-      <div className="w-full bg-[#f5f5f5] pt-24 text-white">
+      <div className="w-full bg-[#f5f5f5] font-workSans pt-24 text-white">
         <div>
           <Navbar />
         </div>

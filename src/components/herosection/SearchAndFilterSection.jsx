@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 export default function SearchAndFilterSection() {
   return (
     <div>
-      <div className="w-full font-workSans py-8 px-4 space-y-6 mx-auto max-w-7xl">
+      <div className="w-full   py-8 px-4 space-y-6 mx-auto max-w-7xl">
         <div className="w-full flex flex-col space-y-4 items-center">
-          <h1 className="md:text-5xl text-4xl font-bold dark:text-white text-blue-600">
+          <h1 className="md:text-5xl  text-4xl font-bold dark:text-white text-blue-600">
             Welcome To
           </h1>
           <h2 className="md:text-6xl text-4xl font-bold dark:text-gray-300 text-indigo-900">

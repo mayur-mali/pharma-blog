@@ -19,7 +19,7 @@ export default function HeroSection() {
       <img src={heroimg} alt="hero" className="" />
       <main className="mx-auto max-w-7xl px-4 ">
         <div className="text-center">
-          <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          <h1 className="text-4xl  tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
             <span className="block xl:inline underline-offset-2 underline">
               The Pharma
             </span>
