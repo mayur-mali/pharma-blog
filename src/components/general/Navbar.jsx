@@ -4,7 +4,6 @@ import { AuthContext } from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 
-import { IoIosLogOut } from "react-icons/io";
 import { VscBell } from "react-icons/vsc";
 import { AiOutlineMenu } from "react-icons/ai";
 function Navbar() {

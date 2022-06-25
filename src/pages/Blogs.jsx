@@ -4,6 +4,7 @@ import useTitle from "../customhooks/useTitle";
 import SearchAndFilterSection from "../components/herosection/SearchAndFilterSection";
 import FeaturedPost from "../components/herosection/FeaturedPost";
 import TrendingPost from "../components/herosection/TrendingPost";
+import FP2 from "../components/herosection/FP2";
 import TodaysHighlight from "../components/herosection/TodaysHighlight";
 
 import MostRecentPost from "../components/herosection/MostRecentPost";
@@ -16,16 +17,22 @@ export default function Blogs() {
   return (
     <>
       <SearchAndFilterSection />
+
+      {/* 
       <div className="grid lg:grid-cols-12 px-6 grid-cols-1 gap-8 py-10 max-w-7xl mx-auto w-full">
         <div className="lg:col-span-9 col-span-1">
           <FeaturedPost />
         </div>
         <div className="lg:col-span-3  col-span-1">
-          {/*<TrendingPost />*/}
+       
           <div className="sticky top-0">
             <TrendingPost />
           </div>
         </div>
+      </div> 
+    */}
+      <div className="py-10 max-w-7xl px-6 mx-auto w-full">
+        <FP2 />
       </div>
       <div className="py-10 max-w-7xl px-6 mx-auto w-full">
         <TodaysHighlight />
