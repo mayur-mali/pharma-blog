@@ -6,6 +6,9 @@ import { googleLogout } from "@react-oauth/google";
 
 import { VscBell } from "react-icons/vsc";
 import { AiOutlineMenu } from "react-icons/ai";
+import MobileMenu from "./MobileMenu";
+import "@animxyz/core";
+import { XyzTransition } from "@animxyz/react";
 function Navbar() {
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(AuthContext);
@@ -118,52 +121,53 @@ function Navbar() {
             </div>
           ) : null}
         </div>
-
-        {mobilenavbar ? (
-          <div
-            className={`w-full absolute left-0 px-4 top-20 h-screen z-20 bg-[#f5f5f5] ${
-              mobilenavbar ? "lg:hidden animate__fadeIn" : "animate__fadeOut"
-            }`}
-          >
-            <div className="flex border-b max-w-lg w-full mx-auto border-black justify-between items-center">
-              <input
-                type="text"
-                onChange={(e) => console.log(e.target.value)}
-                className="w-full capitalize pr-2 py-1 focus:outline-none bg-transparent text-black"
-                placeholder="search...."
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-black"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        <XyzTransition appear xyz="fade-75% up-2  ease-out-back">
+          {mobilenavbar && (
+            <div className="w-full lg:hidden square absolute left-0 py-10 px-4 top-20 h-screen z-20 bg-[#f5f5f5]">
+              <div className="flex border-b max-w-lg w-full mx-auto border-black justify-between items-center">
+                <input
+                  type="text"
+                  onChange={(e) => console.log(e.target.value)}
+                  className="w-full capitalize pr-2 py-1 focus:outline-none bg-transparent text-black"
+                  placeholder="search...."
                 />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-black"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+              <div className="h-full mt-24">
+                <ul className="flex flex-col text-black justify-start items-center font-workSans md:text-6xl text-3xl font-medium  capitalize space-y-10">
+                  <Link to="#">
+                    <li className="hover:text-gray-500 font-extrabold ">
+                      home
+                    </li>
+                  </Link>
+                  <Link to="#">
+                    <li className="hover:text-gray-500 font-extrabold ">
+                      categories
+                    </li>
+                  </Link>
+                  <Link to="#">
+                    <li className="hover:text-gray-500 font-extrabold ">
+                      news
+                    </li>
+                  </Link>
+                </ul>
+              </div>
             </div>
-            <div className="h-full mt-24">
-              <ul className="flex flex-col text-black justify-start items-center font-workSans md:text-6xl text-3xl font-medium  capitalize space-y-10">
-                <Link to="#">
-                  <li className="hover:text-gray-500 font-extrabold ">home</li>
-                </Link>
-                <Link to="#">
-                  <li className="hover:text-gray-500 font-extrabold ">
-                    categories
-                  </li>
-                </Link>
-                <Link to="#">
-                  <li className="hover:text-gray-500 font-extrabold ">news</li>
-                </Link>
-              </ul>
-            </div>
-          </div>
-        ) : null}
+          )}
+        </XyzTransition>
         <div className="lg:hidden flex">
           {currentUser ? (
             <div className="flex space-x-10 items-center  justify-between">
