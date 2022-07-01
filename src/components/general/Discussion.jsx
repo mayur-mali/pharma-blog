@@ -8,8 +8,8 @@ export default function Discussion(props) {
       <div className="flex space-x-3 mt-4">
         <img
           className="w-10 h-10 rounded-full"
-          src={props.user.picture}
-          alt={props.user.name}
+          src={props.user.author.map((user) => user.imgurl)}
+          alt={props.user.author.map((user) => user.name)}
         />
         <div className="space-y-2">
           <textarea

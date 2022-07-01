@@ -1,18 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+
 import axios from "axios";
 import useTitle from "../customhooks/useTitle";
 import Breadcrumbs from "../components/general/Breadcrumbs";
 import Discussion from "../components/general/Discussion";
 import dayjs from "dayjs";
 
-//import { list } from "postcss";
 export default function SingleBlog() {
   var relativeTime = require("dayjs/plugin/relativeTime");
   dayjs.extend(relativeTime);
 
-  const { currentUser } = useContext(AuthContext);
   function createMarkup(content) {
     return { __html: content };
   }
@@ -63,15 +61,15 @@ export default function SingleBlog() {
                 <div className="">
                   <div className="flex my-4 p-4 space-x-2">
                     <img
-                      src={currentUser.picture}
-                      alt={currentUser.name}
+                      src={post.author.map((user) => user.imgurl)}
+                      alt={post.author.map((user) => user.name)}
                       className="w-10 h-10 rounded-full"
                     />
                     <div className="flex flex-col">
                       <h2 className="text-sm ">
-                        Author @{" "}
+                        Author @
                         <span className="hover:text-blue-800 font-bold cursor-pointer">
-                          {currentUser.name}
+                          {post.author.map((user) => user.name)}
                         </span>
                       </h2>
                       <span className="text-xs">
@@ -93,7 +91,9 @@ export default function SingleBlog() {
                 </div>
               </div>
             ))}
-            <Discussion user={currentUser} />
+            {data.map((data) => (
+              <Discussion user={data} key={data._id} />
+            ))}
           </div>
           <div className="bg-gray-100 sticky top-0 col-span-1 min-w-md w-full h-64"></div>
         </div>

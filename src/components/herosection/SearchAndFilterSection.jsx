@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import heroimg from "../../static/assets/svg/flame-787.png";
 export default function SearchAndFilterSection() {
   return (
     <div>
       <div className="w-full   py-8 px-4 space-y-6 mx-auto max-w-7xl">
+        <img src={heroimg} alt="heroimage" className="mx-auto" />
         <div className="w-full flex flex-col space-y-4 items-center">
           <h1 className="md:text-5xl  text-4xl font-bold dark:text-white text-blue-600">
             Welcome To

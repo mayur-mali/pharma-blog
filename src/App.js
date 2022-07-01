@@ -1,6 +1,6 @@
 import "./App.css";
 import Navbar from "./components/general/Navbar";
-import HeroSection from "./components/general/HeroSection";
+import Login from "./pages/Login";
 import Blogs from "./pages/Blogs";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
@@ -37,22 +37,14 @@ function App() {
           path="/"
           element={
             <Layout1>
-              <HeroSection />
+              <Blogs />
             </Layout1>
           }
         />
-        <Route
-          path="/blogs"
-          element={
-            <Layout1>
-              <RequireAuth>
-                <Blogs />
-              </RequireAuth>
-            </Layout1>
-          }
-        ></Route>
+
         <Route path="/post/:slug" element={<SingleBlog />} />
         <Route path="/createpost" element={<CreatePost />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

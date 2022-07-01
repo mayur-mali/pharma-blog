@@ -6,7 +6,6 @@ import { googleLogout } from "@react-oauth/google";
 
 import { VscBell } from "react-icons/vsc";
 import { AiOutlineMenu } from "react-icons/ai";
-import MobileMenu from "./MobileMenu";
 import "@animxyz/core";
 import { XyzTransition } from "@animxyz/react";
 function Navbar() {
@@ -116,10 +115,17 @@ function Navbar() {
               {/* 
               <IoIosLogOut
                 className="text-xl font-bold cursor-pointer"
-                onClick={() => logout()}
+                onClick={() => logout()} <button className="px-4 py-2 bg-slate-100">Login</button>
               /> */}
             </div>
-          ) : null}
+          ) : (
+            <Link
+              to="/login"
+              className="px-4 py-2 bg-red-100 rounded-md text-black"
+            >
+              Login
+            </Link>
+          )}
         </div>
         <XyzTransition appear xyz="fade-75% up-2  ease-out-back">
           {mobilenavbar && (
