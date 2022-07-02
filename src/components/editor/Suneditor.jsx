@@ -2,7 +2,13 @@ import React, { useState } from "react";
 // import CreateNewPostBtn from "../components/general/CreateNewPostBtn";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
-
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import app from "../../firebase.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
@@ -10,6 +16,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function Suneditor(props) {
   const [content, setContent] = useState("");
+
   const [openTab, setOpenTab] = React.useState(1);
   const [loding, setLoding] = useState(false);
 
@@ -21,22 +28,52 @@ export default function Suneditor(props) {
   const nevigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
   const createPost = async () => {
-    setLoding(true);
-    try {
-      await axios.post("/posts/", {
-        title: props.title,
-        content,
-        author: {
-          name: currentUser.name,
-          imgurl: currentUser.picture,
-        },
-      });
-      setTimeout(() => {
-        setLoding(false);
-        nevigate("/blogs");
-      }, 2000);
-    } catch (error) {}
-    
+    // const fileName = new Date().getTime() + props.coverPhoto.name;
+    // const storage = getStorage(app);
+    // const StorageRef = ref(storage, fileName);
+    // const uploadTask = uploadBytesResumable(StorageRef, props.coverPhoto);
+    // uploadTask.on(
+    //   "state_changed",
+    //   (snapshot) => {
+    //     const progress =
+    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //     console.log("Upload is " + progress + "% done");
+    //     switch (snapshot.state) {
+    //       case "paused":
+    //         console.log("Upload is paused");
+    //         break;
+    //       case "running":
+    //         console.log("Upload is running");
+    //         break;
+    //       default:
+    //     }
+    //   },
+    //   (error) => {
+    //     // Handle unsuccessful uploads
+    //   },
+    //   () => {
+    //     // Handle successful uploads on complete
+    //     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+    //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+    //       console.log("File available at", downloadURL);
+    //     });
+    //   }
+    // );
+    // setLoding(true);
+    // try {
+    //   await axios.post("/posts/", {
+    //     title: props.title,
+    //     content,
+    //     author: {
+    //       name: currentUser.name,
+    //       imgurl: currentUser.picture,
+    //     },
+    //   });
+    //   setTimeout(() => {
+    //     setLoding(false);
+    //     nevigate("/");
+    //   }, 2000);
+    // } catch (error) {}
   };
   return (
     <>

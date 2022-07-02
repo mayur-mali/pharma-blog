@@ -1,12 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Suneditor from "../components/editor/Suneditor";
 //import Mdeditor from "../components/Mdeditor";
 //import PostEditor from "../components/PostEditor";
-
+import { FiCheckCircle } from "react-icons/fi";
+import { AiOutlineDelete } from "react-icons/ai";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import app from "../firebase";
 import { RiImageAddLine } from "react-icons/ri";
 export default function CreateNewPost() {
   const [title, setTitle] = useState("");
+  const [file, setFile] = useState(null);
+  const [converImgurl, setConverImgurl] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (file) {
+      setLoading(true);
+      const fileName = new Date().getTime() + "_" + file.name;
+      const storage = getStorage(app);
+      const StorageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(StorageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+          }
+        },
+        (error) => {
+          setLoading(false);
+        },
+        () => {
+          setFile(null);
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setLoading(false);
+            setConverImgurl(downloadURL);
+          });
+        }
+      );
+    }
+  }, [file]);
+
+  // delete converImg
+
+  const deleteCoverimg = () => {
+    const storage = getStorage();
+    const desertRef = ref(storage, converImgurl);
+    deleteObject(desertRef)
+      .then(() => {
+        // File deleted successfully
+        setConverImgurl(null);
+        console.log(desertRef);
+      })
+      .catch((error) => {
+        // Uh-oh, an error occurred!
+      });
+  };
 
   return (
     <div className="w-full font-workSans bg-slate-900 min-h-screen h-auto py-3 relative">
@@ -33,28 +98,47 @@ export default function CreateNewPost() {
         </div>
       </div>
       <div className="max-w-7xl px-4 mt-6 mx-auto">
-        <div className="relative">
-          <div className="w-full bg-black absolute h-72 rounded-lg bg-opacity-75"></div>
-          <div className="absolute h-full flex text-center items-center w-full">
-            <h1 className=" w-full text-white sm:text-5xl text-3xl  capitalize">
-              {title}
-            </h1>
-          </div>
-          <img
-            src="https://images.unsplash.com/photo-1638624269877-1f8b55da3e71?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-            alt="post_img"
-            className="rounded-lg h-72  w-full object-cover"
-          />
+        <div className="">
+          {!converImgurl && (
+            <>
+              {loading ? (
+                "Loading..."
+              ) : (
+                <>
+                  <label
+                    className="px-4 py-2 flex border w-56 items-center justify-between cursor-pointer"
+                    htmlFor="fileInput"
+                  >
+                    <h3 className="text-white">Add Cover Image</h3>
+                    <RiImageAddLine className="text-3xl text-white" />
+                  </label>
+                  <input
+                    type="file"
+                    id="fileInput"
+                    style={{ display: "none" }}
+                    onChange={(e) => setFile(e.target.files[0])}
+                  />
+                </>
+              )}
+            </>
+          )}
+          {converImgurl && (
+            <>
+              <img
+                src={converImgurl}
+                alt="converImgurl"
+                className="rounded-lg h-72  w-full object-cover"
+              />
+              <span className="text-white">
+                <AiOutlineDelete
+                  className="text-3xl text-white"
+                  onClick={deleteCoverimg}
+                />
+              </span>
+            </>
+          )}
         </div>
-        <label htmlFor="fileInput">
-          <RiImageAddLine className="text-3xl text-white" />
-        </label>
-        <input
-          type="file"
-          id="fileInput"
-          style={{ display: "none" }}
-          onChange={(e) => console.log(e.target.files[0])}
-        />
+
         <div className="my-8 flex md:flex-row flex-col items-center">
           <input
             type="text"
@@ -66,7 +150,7 @@ export default function CreateNewPost() {
         </div>
 
         <div>
-          <Suneditor title={title} />
+          <Suneditor title={title} coverPhoto={file} />
         </div>
       </div>
     </div>

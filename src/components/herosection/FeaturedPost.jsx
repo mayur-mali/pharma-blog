@@ -7,24 +7,27 @@ export default function FeaturedPost() {
   var relativeTime = require("dayjs/plugin/relativeTime");
   dayjs.extend(relativeTime);
   const [postData, setPostData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setLoading(true);
-    const load = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    //setLoading(true);
+    // const load = setTimeout(() => {
+    //   setLoading(false);
+    // }, 4000);
 
     const getPost = async () => {
+      setLoading(true);
       try {
         const data = await axios.get("/posts");
         setPostData(data.data);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.error(error);
       }
     };
     getPost();
 
-    return () => clearTimeout(load);
+    //return () => clearTimeout(load);
   }, []);
   return (
     <div>
@@ -34,18 +37,18 @@ export default function FeaturedPost() {
         </h1>
         <div className="grid md:grid-cols-8 md:mt-12 mt-8 grid-cols-1 gap-x-10">
           <div className="md:col-span-5 col-span-1">
+            {loading && (
+              <div>
+                <div className="flex-none  animate-pulse w-full md:h-96 sm:h-60 h-40 rounded-xl bg-slate-900 mr-4"></div>
+                <div className="flex flex-col mt-5 py-2 pr-2 justify-between space-y-4">
+                  <div className="bg-gray-600 h-2 w-96"></div>
+                  <div className="bg-gray-600 h-2 w-60"></div>
+                  <div className="bg-gray-600 h-2 w-72"></div>
+                </div>
+              </div>
+            )}
             {postData.slice(0, 1).map((post, index) => (
               <div className="flex flex-col  text-black" key={index}>
-                {loading && (
-                  <div>
-                    <div className="flex-none animate animate-pulse w-full md:h-96 sm:h-60 h-40 rounded-xl bg-slate-900 mr-4"></div>
-                    <div className="flex flex-col mt-5 py-2 pr-2 justify-between space-y-4">
-                      <div className="bg-gray-600 h-2 w-96"></div>
-                      <div className="bg-gray-600 h-2 w-60"></div>
-                      <div className="bg-gray-600 h-2 w-72"></div>
-                    </div>
-                  </div>
-                )}
                 {!loading && (
                   <>
                     <div className="flex-none  w-full md:h-96 sm:h-60 h-40 rounded-xl bg-slate-300 mr-4"></div>
@@ -101,17 +104,22 @@ export default function FeaturedPost() {
             ))}
           </div>
           <div className="md:col-span-3 col-span-1 w-full space-y-4 py-2">
-            {postData.slice(1, 4).map((post, index) => (
-              <div className="flex sm:flex-row flex-col text-black" key={index}>
-                {loading && (
-                  <>
+            {loading && (
+              <>
+                {[1, 2, 3].map((item, index) => (
+                  <div key={index} className="flex sm:flex-row flex-col">
                     <div className="flex-none animate-pulse sm:w-40 w-full sm:h-28 h-40 rounded-xl bg-slate-600 mr-4"></div>
                     <div className="flex w-full animate-pulse flex-col py-2 pr-2 justify-between space-y-2">
                       <div className="bg-gray-600 h-2 w-72"></div>
                       <div className="bg-gray-600 h-2 w-60"></div>
                     </div>
-                  </>
-                )}
+                  </div>
+                ))}
+              </>
+            )}
+
+            {postData.slice(1, 4).map((post, index) => (
+              <div className="flex sm:flex-row flex-col text-black" key={index}>
                 {!loading && (
                   <>
                     <div className="flex-none sm:w-40 w-full sm:h-28 h-40 rounded-xl bg-slate-300 mr-4"></div>
