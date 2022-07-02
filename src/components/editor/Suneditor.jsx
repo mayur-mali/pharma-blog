@@ -36,7 +36,7 @@ export default function Suneditor(props) {
         nevigate("/blogs");
       }, 2000);
     } catch (error) {}
-    //console.log("sent..", postsCollectionRef);
+    
   };
   return (
     <>

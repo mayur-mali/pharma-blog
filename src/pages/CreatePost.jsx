@@ -4,6 +4,7 @@ import Suneditor from "../components/editor/Suneditor";
 //import Mdeditor from "../components/Mdeditor";
 //import PostEditor from "../components/PostEditor";
 
+import { RiImageAddLine } from "react-icons/ri";
 export default function CreateNewPost() {
   const [title, setTitle] = useState("");
 
@@ -45,7 +46,15 @@ export default function CreateNewPost() {
             className="rounded-lg h-72  w-full object-cover"
           />
         </div>
-
+        <label htmlFor="fileInput">
+          <RiImageAddLine className="text-3xl text-white" />
+        </label>
+        <input
+          type="file"
+          id="fileInput"
+          style={{ display: "none" }}
+          onChange={(e) => console.log(e.target.files[0])}
+        />
         <div className="my-8 flex md:flex-row flex-col items-center">
           <input
             type="text"

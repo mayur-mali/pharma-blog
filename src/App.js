@@ -8,9 +8,11 @@ import { AuthContext } from "./context/AuthContext";
 import SingleBlog from "./pages/SingleBlog";
 import CreatePost from "./pages/CreatePost";
 import Footer from "./components/general/Footer";
+import useTitle from "./customhooks/useTitle";
 
 function App() {
   //const currentUser = false;
+  useTitle("pharma blog app");
   const { currentUser } = useContext(AuthContext);
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/" />;
