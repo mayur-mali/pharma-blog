@@ -54,7 +54,7 @@ export default function SingleBlog() {
                 <div className="w-full mb-4 h-80 relative">
                   <img
                     className="absolute object-cover w-full h-full rounded"
-                    src="https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
+                    src={post.photo}
                     alt={post.title}
                   />
                 </div>

@@ -45,7 +45,14 @@ function App() {
         />
 
         <Route path="/post/:slug" element={<SingleBlog />} />
-        <Route path="/createpost" element={<CreatePost />} />
+        <Route
+          path="/createpost"
+          element={
+            <RequireAuth>
+              <CreatePost />
+            </RequireAuth>
+          }
+        />
         <Route path="/login" element={<Login />} />
       </Routes>
     </div>

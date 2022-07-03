@@ -9,11 +9,6 @@ export default function FeaturedPost() {
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    //setLoading(true);
-    // const load = setTimeout(() => {
-    //   setLoading(false);
-    // }, 4000);
-
     const getPost = async () => {
       setLoading(true);
       try {
@@ -51,7 +46,13 @@ export default function FeaturedPost() {
               <div className="flex flex-col  text-black" key={index}>
                 {!loading && (
                   <>
-                    <div className="flex-none  w-full md:h-96 sm:h-60 h-40 rounded-xl bg-slate-300 mr-4"></div>
+                    <div className="flex-none overflow-hidden w-full md:h-96 sm:h-60 h-40 rounded-xl bg-slate-300 mr-4">
+                      <img
+                        src={post.photo}
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <div className="flex flex-col mt-5 py-2 pr-2 justify-between space-y-4">
                       <Link to={`/post/${post.slug}`}>
                         <h3 className="md:text-2xl sm:text-xl text-sm font-bold hover:text-gray-600 capitalize line-clamp-2">
@@ -110,8 +111,8 @@ export default function FeaturedPost() {
                   <div key={index} className="flex sm:flex-row flex-col">
                     <div className="flex-none animate-pulse sm:w-40 w-full sm:h-28 h-40 rounded-xl bg-slate-600 mr-4"></div>
                     <div className="flex w-full animate-pulse flex-col py-2 pr-2 justify-between space-y-2">
-                      <div className="bg-gray-600 h-2 w-72"></div>
-                      <div className="bg-gray-600 h-2 w-60"></div>
+                      <div className="bg-gray-600 h-2 w-full"></div>
+                      <div className="bg-gray-600 h-2 w-full"></div>
                     </div>
                   </div>
                 ))}

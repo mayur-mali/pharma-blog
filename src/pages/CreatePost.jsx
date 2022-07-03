@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Suneditor from "../components/editor/Suneditor";
-//import Mdeditor from "../components/Mdeditor";
-//import PostEditor from "../components/PostEditor";
-import { FiCheckCircle } from "react-icons/fi";
-import { AiOutlineDelete } from "react-icons/ai";
+
+import { AiOutlineDelete, AiOutlineLoading3Quarters } from "react-icons/ai";
 import {
   getStorage,
   ref,
@@ -102,7 +100,10 @@ export default function CreateNewPost() {
           {!converImgurl && (
             <>
               {loading ? (
-                "Loading..."
+                <div className="flex items-center space-x-4">
+                  <AiOutlineLoading3Quarters className="text-white animate-spin text-2xl" />
+                  <h3 className="text-white">Uploading...</h3>
+                </div>
               ) : (
                 <>
                   <label
@@ -129,9 +130,10 @@ export default function CreateNewPost() {
                 alt="converImgurl"
                 className="rounded-lg h-72  w-full object-cover"
               />
-              <span className="text-white">
+              <span className="text-white justify-center cursor-pointer flex space-x-4 items-center mt-4 border px-4 py-2 w-56 rounded-md">
+                <h6>Remove Image..</h6>
                 <AiOutlineDelete
-                  className="text-3xl text-white"
+                  className="text-3xl text-red-400"
                   onClick={deleteCoverimg}
                 />
               </span>
@@ -150,7 +152,7 @@ export default function CreateNewPost() {
         </div>
 
         <div>
-          <Suneditor title={title} coverPhoto={file} />
+          <Suneditor title={title} coverurl={converImgurl} />
         </div>
       </div>
     </div>
