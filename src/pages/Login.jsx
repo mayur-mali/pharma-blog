@@ -26,7 +26,30 @@ export default function Login() {
         <img src={loginImg} alt="loginImg" className="w-72 mx-auto h-full " />
         <div className="px-4 space-y-8">
           <h2 className="text-black text-3xl font-bold ">Log In</h2>
-          <div className="space-y-4 ">
+
+          <div className="space-y-4 relative ">
+            <hr className="mb-8" />
+            <span className="px-2 -top-8 left-56 py-1 rounded-md bg-slate-200 text-black absolute">
+              Or
+            </span>
+            <div className="flex items-center justify-center">
+              <GoogleLogin
+                theme="filled_black"
+                size="large"
+                shape="square"
+                type="icon"
+                onSuccess={(credentialResponse) => {
+                  const token = credentialResponse.credential;
+                  var decoded = jwt_decode(token);
+                  dispatch({ type: "LOGIN", payload: decoded });
+                  localStorage.setItem("isLogin", true);
+                  nevigate("/");
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            </div>
             <div className="flex py-2 items-center border-b">
               <span className="text-slate-600 text-2xl"> @</span>
               <input
@@ -52,24 +75,11 @@ export default function Login() {
                 Login
               </button>
               <h3 className="text-gray-600 font-semibold mt-4">
-                Or Login with
+                You Don't Have an Account ?
+                <Link to="/signup" className="text-blue-600 ml-2">
+                  Sign up
+                </Link>
               </h3>
-            </div>
-            <div className="flex justify-center items-center">
-              <GoogleLogin
-                theme="filled_black"
-                size="large"
-                onSuccess={(credentialResponse) => {
-                  const token = credentialResponse.credential;
-                  var decoded = jwt_decode(token);
-                  dispatch({ type: "LOGIN", payload: decoded });
-                  localStorage.setItem("isLogin", true);
-                  nevigate("/");
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
             </div>
           </div>
         </div>

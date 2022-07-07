@@ -1,6 +1,7 @@
 import "./App.css";
 import Navbar from "./components/general/Navbar";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Blogs from "./pages/Blogs";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
@@ -54,6 +55,7 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>
   );
