@@ -102,7 +102,7 @@ export default function Signup() {
                 Email
               </label>
             </div>
-            <div className="flex py-2 items-center relative border-b">
+            <div className="flex py-2 items-center relative ">
               <AiOutlineLock className="text-slate-600 text-2xl" />
               <input
                 type="password"
@@ -112,7 +112,7 @@ export default function Signup() {
                 onChange={handleOnChange}
                 required
                 placeholder="Password"
-                className="w-full focus:outline-none ml-3 placeholder-transparent peer"
+                className="w-full border-b focus:outline-none ml-3 placeholder-transparent peer"
               />
               <label
                 htmlFor="password"
@@ -121,7 +121,7 @@ export default function Signup() {
                 Password
               </label>
             </div>
-            <div className="flex py-2 items-center relative border-b">
+            <div className="flex py-2 items-center relative ">
               <AiOutlineLock className="text-slate-600 text-2xl" />
               <input
                 type="password"
@@ -131,7 +131,7 @@ export default function Signup() {
                 onChange={handleOnChange}
                 required
                 placeholder="Confirm Password"
-                className="w-full focus:outline-none ml-3 placeholder-transparent peer"
+                className="w-full border-b focus:outline-none ml-3 placeholder-transparent peer"
               />
               <label
                 htmlFor="confirmpassword"
