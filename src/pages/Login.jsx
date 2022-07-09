@@ -3,35 +3,17 @@ import loginImg from "../static/assets/svg/login_screen.svg";
 import { AiOutlineLock } from "react-icons/ai";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+
 import { AuthContext } from "../context/AuthContext";
-import { FaFacebook, FaTwitter } from "react-icons/fa";
+
 import { GoogleLogin } from "@react-oauth/google";
-import TwitterLogin from "react-twitter-login";
+
 import jwt_decode from "jwt-decode";
 import useTitle from "../customhooks/useTitle";
 
 export default function Login() {
-  const [login, setLogin] = useState(false);
-  const [data, setData] = useState({});
-  const [picture, setPicture] = useState("");
   const { dispatch } = useContext(AuthContext);
 
-  const authHandler = (err, data) => {
-    console.log(err, data);
-  };
-  const responseFacebook = (response) => {
-    setData(response);
-    setPicture(response.picture.data.url);
-    localStorage.setItem("facebook", response.accessToken);
-    if (response.accessToken) {
-      setLogin(true);
-      nevigate("/");
-      console.log(data);
-    } else {
-      setLogin(false);
-    }
-  };
   useTitle("Log in");
   const nevigate = useNavigate();
   return (
@@ -42,7 +24,11 @@ export default function Login() {
             <HiOutlineArrowNarrowLeft className="text-2xl" />
           </Link>
         </div>
-        <img src={loginImg} alt="loginImg" className="w-72 mx-auto h-full " />
+        <img
+          src={loginImg}
+          alt="loginImg"
+          className="w-72 mx-auto min-h-full "
+        />
         <div className="px-4 space-y-8">
           <h2 className="text-black text-3xl font-bold ">Log In</h2>
 
@@ -91,9 +77,11 @@ export default function Login() {
               </button>
               <div className="relative w-full mt-12">
                 <hr className="mb-8" />
-                <span className="px-2 -top-4 text-sm left-[180px] py-1 rounded-md bg-slate-100 text-black absolute">
-                  Or continue with
-                </span>
+                <div className="-top-4 absolute w-full flex justify-center items-center">
+                  <span className="px-2  text-sm py-1 rounded-md bg-slate-100 text-black ">
+                    Or continue with
+                  </span>
+                </div>
                 <div className="flex items-center justify-center space-x-4">
                   <GoogleLogin
                     theme="filled_black"
@@ -110,32 +98,6 @@ export default function Login() {
                     onError={() => {
                       console.log("Login Failed");
                     }}
-                  />
-
-                  <FacebookLogin
-                    appId="448867003424075"
-                    callback={responseFacebook}
-                    render={(renderProps) => (
-                      <button
-                        onClick={renderProps.onClick}
-                        className="h-10 w-10 rounded flex justify-center items-center bg-white border-2 border-black"
-                      >
-                        <FaFacebook className="text-2xl" />
-                      </button>
-                    )}
-                  />
-
-                  <TwitterLogin
-                    authCallback={authHandler}
-                    consumerKey={"YkFmS0QyWnczQkVkd3ltSnc1aWY6MTpjaQ"}
-                    consumerSecret={
-                      "AIrrbhKgtHSWFWBVt55_t9wC2vo3uOgRPkEkXAsw8ni4wV_Np9"
-                    }
-                    children={
-                      <button className="h-10 w-10 rounded flex justify-center items-center bg-white border-2 border-black">
-                        <FaTwitter className="text-2xl" />
-                      </button>
-                    }
                   />
                 </div>
               </div>

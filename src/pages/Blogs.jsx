@@ -14,13 +14,13 @@ export default function Blogs() {
     <>
       <SearchAndFilterSection />
       <div className="py-10 max-w-7xl px-6 mx-auto w-full">
-        {/*<FeaturedPost />*/}
-      </div>
-      <div className="py-10 max-w-7xl px-6 mx-auto w-full">
-        <TodaysHighlight />
+        <FeaturedPost />
       </div>
       <div className="py-10 px-6 max-w-7xl mx-auto w-full">
         <MostRecentPost />
+      </div>
+      <div className="py-10 max-w-7xl px-6 mx-auto w-full">
+        <TodaysHighlight />
       </div>
       {currentUser && <CreateNewPostBtn />}
     </>

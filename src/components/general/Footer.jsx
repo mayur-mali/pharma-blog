@@ -120,7 +120,7 @@ export default function Footer() {
           </div>
           <p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
             © 2022 HRPIPER, Inc. All rights reserved. MADE WITH
-            <span className="text-red-500 text-xl">&#9829;</span> BY MAYUR
+            <span className="text-red-500 text-xl"> &#9829;</span> BY MAYUR
           </p>
         </div>
       </div>

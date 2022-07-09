@@ -27,9 +27,16 @@ export default function FeaturedPost() {
   return (
     <div>
       <div>
-        <h1 className="md:text-7xl text-3xl font-extrabold text-black">
-          Featured Post
-        </h1>
+        <div className="flex justify-between items-center pr-8">
+          <h1 className="md:text-7xl text-3xl font-extrabold text-black">
+            Featured Post
+          </h1>
+          <Link to="/allpost">
+            <h3 className="md:text-3xl text-xl hover:text-blue-600 hover:underline font-extrabold text-black">
+              All Post
+            </h3>
+          </Link>
+        </div>
         <div className="grid md:grid-cols-8 md:mt-12 mt-8 grid-cols-1 gap-x-10">
           <div className="md:col-span-5 col-span-1">
             {loading && (
@@ -43,19 +50,19 @@ export default function FeaturedPost() {
               </div>
             )}
             {postData.slice(0, 1).map((post, index) => (
-              <div className="flex flex-col  text-black" key={index}>
+              <div className="flex flex-col group text-black" key={index}>
                 {!loading && (
                   <>
-                    <div className="flex-none overflow-hidden w-full md:h-96 sm:h-60 h-40 rounded-xl bg-slate-300 mr-4">
+                    <div className="flex-none overflow-hidden cursor-pointer w-full md:h-96 sm:h-60 h-40 rounded-xl border bg-slate-300 mr-4">
                       <img
                         src={post.photo}
                         alt={post.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full transition duration-500 group-hover:scale-110 object-cover"
                       />
                     </div>
                     <div className="flex flex-col mt-5 py-2 pr-2 justify-between space-y-4">
                       <Link to={`/post/${post.slug}`}>
-                        <h3 className="md:text-2xl sm:text-xl text-sm font-bold hover:text-gray-600 capitalize line-clamp-2">
+                        <h3 className="md:text-2xl sm:text-xl text-sm font-bold group-hover:text-gray-600 capitalize line-clamp-2">
                           {post.title}
                         </h3>
                       </Link>
@@ -120,13 +127,22 @@ export default function FeaturedPost() {
             )}
 
             {postData.slice(1, 4).map((post, index) => (
-              <div className="flex sm:flex-row flex-col text-black" key={index}>
+              <div
+                className="flex group cursor-pointer sm:flex-row flex-col text-black"
+                key={index}
+              >
                 {!loading && (
                   <>
-                    <div className="flex-none sm:w-40 w-full sm:h-28 h-40 rounded-xl bg-slate-300 mr-4"></div>
+                    <div className="flex-none sm:w-40 border  overflow-hidden w-full sm:h-28 h-40 rounded-xl bg-slate-300 mr-4">
+                      <img
+                        src={post.photo}
+                        alt={post.title}
+                        className="w-full h-full transition duration-500 group-hover:scale-110 object-cover"
+                      />
+                    </div>
                     <div className="flex w-full flex-col py-2 pr-2 justify-between space-y-2">
                       <Link to={`/post/${post.slug}`}>
-                        <h3 className="sm:text-md text-sm font-bold capitalize line-clamp-2">
+                        <h3 className="sm:text-md text-sm group-hover:text-gray-600 font-bold capitalize line-clamp-2">
                           {post.title}
                         </h3>
                       </Link>
