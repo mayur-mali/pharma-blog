@@ -38,7 +38,13 @@ export default function Signup() {
             <HiOutlineArrowNarrowLeft className="text-2xl" />
           </Link>
         </div>
-        <img src={signupImg} alt="signupImg" className="w-72 mx-auto h-full " />
+        <div className="w-full relative h-72">
+          <img
+            src={signupImg}
+            alt="signupImg"
+            className="w-full absolute mx-auto h-full "
+          />
+        </div>
         <div className="px-4 space-y-8">
           <h2 className="text-black text-3xl font-bold ">Sign up</h2>
           <div className="space-y-6">

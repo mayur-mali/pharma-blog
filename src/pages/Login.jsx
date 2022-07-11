@@ -24,11 +24,13 @@ export default function Login() {
             <HiOutlineArrowNarrowLeft className="text-2xl" />
           </Link>
         </div>
-        <img
-          src={loginImg}
-          alt="loginImg"
-          className="w-72 mx-auto min-h-full "
-        />
+        <div className="w-full relative h-72">
+          <img
+            src={loginImg}
+            alt="loginImg"
+            className="w-full h-full absolute mx-auto"
+          />
+        </div>
         <div className="px-4 space-y-8">
           <h2 className="text-black text-3xl font-bold ">Log In</h2>
 

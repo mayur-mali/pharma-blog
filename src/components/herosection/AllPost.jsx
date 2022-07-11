@@ -49,7 +49,8 @@ export default function AllPost() {
                 className="col-span-1   bg-slate-600 animate-pulse shadow-md h-full rounded-lg overflow-hidden"
                 key={i}
               >
-                <div className="bg-slate-400 w-full  h-96"></div>
+                <div className=" w-full  h-40"></div>
+                <div className="h-56 w-full"></div>
               </div>
             ))}
           </>
@@ -72,11 +73,16 @@ export default function AllPost() {
                       />
                     )}
                     {!post.photo && (
-                      <img
-                        src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                        alt="{post.title}"
-                        className="w-full h-full object-cover"
-                      />
+                      <>
+                        <img
+                          src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                          alt="{post.title}"
+                          className="w-full grayscale h-full object-cover"
+                        />
+                        <h2 className="text-white p-4 backdrop-blur-[1px]	font-extrabold absolute capitalize inset-14  md:text-xl text-lg md:line-clamp-2">
+                          {post.title}
+                        </h2>
+                      </>
                     )}
                   </div>
                   <div>
@@ -84,7 +90,7 @@ export default function AllPost() {
                       <span className="text-blue-700 font-bold md:text-md text-sm capitalize">
                         cology
                       </span>
-                      <h2 className="text-gray-600 md:text-4xl text-md font-bold md:line-clamp-2">
+                      <h2 className="text-black hover:text-gray-500 md:text-xl text-lg font-bold md:line-clamp-2">
                         {post.title}
                       </h2>
                       <div>
