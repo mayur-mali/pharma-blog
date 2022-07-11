@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosInstance } from "../../config";
 import dayjs from "dayjs";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -18,7 +18,7 @@ export default function MostRecentPost() {
     const getPost = async () => {
       setLoading(true);
       try {
-        const data = await axios.get("/posts");
+        const data = await axiosInstance.get("/posts");
         setPostData(data.data);
         setLoading(false);
       } catch (error) {

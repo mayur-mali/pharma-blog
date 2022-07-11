@@ -2,7 +2,6 @@
   "name": "pharmacyblog",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://pharmacy-api-app.herokuapp.com/api/",
   "dependencies": {
     "@animxyz/core": "^0.6.6",
     "@animxyz/react": "^0.6.6",

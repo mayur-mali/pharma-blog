@@ -4,7 +4,7 @@ import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { axiosInstance } from "../../config";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -24,7 +24,7 @@ export default function Suneditor(props) {
   const createPost = async () => {
     setLoding(true);
     try {
-      await axios.post("/posts/", {
+      await axiosInstance.post("/posts/", {
         title: props.title,
         content,
         photo: props.coverurl,

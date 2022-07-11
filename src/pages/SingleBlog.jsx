@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import axios from "axios";
+import { axiosInstance } from "../config";
 import useTitle from "../customhooks/useTitle";
 import Breadcrumbs from "../components/general/Breadcrumbs";
 import Discussion from "../components/general/Discussion";
@@ -22,8 +22,8 @@ export default function SingleBlog() {
   useEffect(() => {
     const getPost = async () => {
       try {
-        const data = await axios.get("/posts/" + slug);
-        await axios.put("/posts/views/" + data.data[0]._id);
+        const data = await axiosInstance.get("/posts/" + slug);
+        await axiosInstance.put("/posts/views/" + data.data[0]._id);
         setData(data.data);
         setLoading(false);
         //console.log(data.data[0]._id);

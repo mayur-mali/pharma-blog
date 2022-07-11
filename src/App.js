@@ -10,6 +10,7 @@ import SingleBlog from "./pages/SingleBlog";
 import CreatePost from "./pages/CreatePost";
 import Footer from "./components/general/Footer";
 import useTitle from "./customhooks/useTitle";
+import Nav from "./components/general/Nav";
 
 function App() {
   //const currentUser = false;
@@ -23,7 +24,8 @@ function App() {
     return (
       <div className="w-full bg-[#f5f5f5] font-workSans pt-24 text-white">
         <div>
-          <Navbar />
+          {/* <Navbar /> */}
+          <Nav />
         </div>
         {children}
         <>

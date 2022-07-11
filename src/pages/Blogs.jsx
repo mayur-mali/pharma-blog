@@ -6,6 +6,7 @@ import TodaysHighlight from "../components/herosection/TodaysHighlight";
 import MostRecentPost from "../components/herosection/MostRecentPost";
 import CreateNewPostBtn from "../components/general/CreateNewPostBtn";
 import { AuthContext } from "../context/AuthContext";
+import AllPost from "../components/herosection/AllPost";
 
 export default function Blogs() {
   useTitle("blogs");
@@ -13,6 +14,8 @@ export default function Blogs() {
   return (
     <>
       <SearchAndFilterSection />
+      <AllPost />
+      {/* 
       <div className="py-10 max-w-7xl px-6 mx-auto w-full">
         <FeaturedPost />
       </div>
@@ -21,7 +24,7 @@ export default function Blogs() {
       </div>
       <div className="py-10 max-w-7xl px-6 mx-auto w-full">
         <TodaysHighlight />
-      </div>
+      </div> */}
       {currentUser && <CreateNewPostBtn />}
     </>
   );
