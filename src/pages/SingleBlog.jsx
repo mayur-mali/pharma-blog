@@ -57,11 +57,24 @@ export default function SingleBlog() {
                 {data.map((post) => (
                   <div key={post._id}>
                     <div className="w-full mb-4 h-80 relative">
-                      <img
-                        className="absolute object-cover w-full h-full rounded"
-                        src={post.photo}
-                        alt={post.title}
-                      />
+                      {post.photo && (
+                        <>
+                          <img
+                            src={post.photo}
+                            alt={post.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </>
+                      )}
+                      {!post.photo && (
+                        <>
+                          <img
+                            src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                            alt="{post.title}"
+                            className="w-full grayscale h-full object-cover"
+                          />
+                        </>
+                      )}
                     </div>
                     <div className="">
                       <div className="flex my-4 p-4 space-x-2">

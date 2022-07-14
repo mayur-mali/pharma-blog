@@ -230,8 +230,8 @@ export default function Nav() {
       </div>
       <XyzTransition appear xyz="fade-75% up-2  ease-out-back">
         {mobileMenu && (
-          <div className="sm:hidden" id="mobile-menu">
-            <div className="flex border-b max-w-lg w-full mx-auto border-white justify-between items-center">
+          <div className="sm:hidden px-4" id="mobile-menu">
+            <div className="flex border-b  max-w-lg w-full mx-auto border-white justify-between items-center">
               <input
                 type="text"
                 onChange={(e) => console.log(e.target.value)}
