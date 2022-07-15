@@ -11,6 +11,7 @@ import CreatePost from "./pages/CreatePost";
 import Footer from "./components/general/Footer";
 import useTitle from "./customhooks/useTitle";
 import Nav from "./components/general/Nav";
+import ScrollToTop from "./components/general/ScrollToTop";
 
 function App() {
   //const currentUser = false;
@@ -25,6 +26,7 @@ function App() {
       <div className="w-full bg-[#f5f5f5] font-workSans pt-24 text-white">
         <div>
           {/* <Navbar /> */}
+
           <Nav />
         </div>
         {children}
@@ -37,6 +39,7 @@ function App() {
 
   return (
     <div className="App h-screen">
+      <ScrollToTop />
       <Routes>
         <Route
           path="/"

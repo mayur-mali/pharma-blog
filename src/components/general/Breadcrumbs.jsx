@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Breadcrumbs(props) {
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-white md:block hidden">
         <div className="py-8 px-4  lg:py-10">
           <nav className="flex" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-4">

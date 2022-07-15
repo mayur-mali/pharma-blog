@@ -3,7 +3,7 @@ import React from "react";
 export default function Discussion(props) {
   const [hideBtn, sethideBtn] = React.useState(false);
   return (
-    <div className="border-t-2 my-8 py-2">
+    <div className="border-t-2 px-2 my-8 py-2">
       <h1 className="text-2xl font-bold">Discussion</h1>
       <div className="flex space-x-3 mt-4">
         <img

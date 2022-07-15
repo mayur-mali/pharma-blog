@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FaShare } from "react-icons/fa";
+import { FcLike } from "react-icons/fc";
+import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { axiosInstance } from "../config";
 import useTitle from "../customhooks/useTitle";
 import Breadcrumbs from "../components/general/Breadcrumbs";
@@ -49,20 +52,20 @@ export default function SingleBlog() {
           <AiOutlineLoading3Quarters className="text-4xl  animate-spin" />
         </div>
       ) : (
-        <div className="w-full min-h-full py-8 bg-[#f5f5f5]">
-          <div className="max-w-6xl p-4 md:rounded-xl bg-white mx-auto w-full">
+        <div className="w-full min-h-full pb-8 bg-[#f5f5f5]">
+          <div className="max-w-6xl md:p-4 md:rounded-xl bg-white mx-auto w-full">
             <Breadcrumbs data={data} />
-            <div className="grid lg:grid-cols-4 px-4 gap-6 grid-cols-1">
+            <div className="grid lg:grid-cols-4 gap-6 grid-cols-1">
               <div className="lg:col-span-3 col-span-1 text-black ">
                 {data.map((post) => (
                   <div key={post._id}>
-                    <div className="w-full mb-4 h-80 relative">
+                    <div className="w-full mb-4 md:h-80 h-96 relative p-2">
                       {post.photo && (
                         <>
                           <img
                             src={post.photo}
                             alt={post.title}
-                            className="w-full h-full object-cover"
+                            className="w-full rounded-lg h-full object-cover shadow-2xl"
                           />
                         </>
                       )}
@@ -75,33 +78,40 @@ export default function SingleBlog() {
                           />
                         </>
                       )}
+                      <div className="right-5 w-[100px] flex items-center justify-between -bottom-4 absolute">
+                        <div className="p-3 rounded-full bg-white bg-opacity-90">
+                          <FaShare className="text-xl text-gray-800" />
+                        </div>
+                        <div className="p-3 rounded-full bg-white bg-opacity-90">
+                          <FcLike className="text-xl" />
+                        </div>
+                      </div>
+                      <div className="absolute md:hidden block left-5 bg-opacity-70 top-4 p-2 bg-white rounded-full">
+                        <Link to="/">
+                          <MdOutlineKeyboardBackspace className="text-2xl" />
+                        </Link>
+                      </div>
                     </div>
-                    <div className="">
-                      <div className="flex my-4 p-4 space-x-2">
+                    <div>
+                      <h1 className="font-bold capitalize p-2 md:text-5xl text-3xl">
+                        {post.title}
+                      </h1>
+                      <div className="flex my-1 p-4 items-center space-x-2">
                         <img
                           src={post.author.map((user) => user.imgurl)}
                           alt={post.author.map((user) => user.name)}
-                          className="w-10 h-10 rounded-full"
+                          className="w-8 h-8 rounded-full"
                         />
-                        <div className="flex flex-col">
+                        <div>
                           <h2 className="text-sm ">
-                            Author @
                             <span className="hover:text-blue-800 font-bold cursor-pointer">
-                              {post.author.map((user) => user.name)}
-                            </span>
-                          </h2>
-                          <span className="text-xs">
-                            <span className="mr-1">Posted on</span>
-                            {dayjs(post.createdAt).format("DD/MM/YYYY")} |
-                            <span className="ml-1">
+                              {post.author.map((user) => user.name)} |
                               {dayjs(post.createdAt).fromNow()}
                             </span>
-                          </span>
+                          </h2>
                         </div>
                       </div>
-                      <h1 className="font-bold p-4 md:text-5xl text-3xl">
-                        {post.title}
-                      </h1>
+
                       <div
                         className="mt-8 sun-editor-editable md:!text-xl !text-lg !text-black !tracking-wide"
                         dangerouslySetInnerHTML={createMarkup(post.content)}
