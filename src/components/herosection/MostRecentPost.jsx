@@ -11,9 +11,7 @@ export default function MostRecentPost() {
   var localizedFormat = require("dayjs/plugin/localizedFormat");
   dayjs.extend(localizedFormat);
   //dayjs.extend(relativeTime);
-  function createMarkup(content) {
-    return { __html: content };
-  }
+
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [contentLoading, setContentLoading] = useState(false);
@@ -57,8 +55,19 @@ export default function MostRecentPost() {
                   className="col-span-1   bg-slate-600 animate-pulse shadow-md h-full rounded-lg overflow-hidden"
                   key={i}
                 >
-                  <div className=" w-full  h-40"></div>
-                  <div className="h-56 w-full"></div>
+                  <div className=" w-full bg-gray-400 h-56"></div>
+                  <div className="p-4 w-full flex justify-between items-center bg-gray-300">
+                    <div className="flex space-x-4 items-start">
+                      <div className="h-12 w-12 rounded-full bg-slate-400"></div>
+                      <div className="flex h-10 flex-col justify-between">
+                        <div className="w-24 bg-gray-400 h-2 "></div>
+                        <div className="w-20 bg-gray-900 h-2"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="p-5 w-24 rounded-md bg-gray-500"></div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </>
