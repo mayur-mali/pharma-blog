@@ -10,6 +10,9 @@ import useTitle from "../customhooks/useTitle";
 import { useState } from "react";
 
 export default function Signup() {
+  useTitle("Sign up");
+  const nevigate = useNavigate();
+
   const [user, setUser] = useState({
     fname: "",
     lname: "",
@@ -23,13 +26,12 @@ export default function Signup() {
     let value = e.target.value;
     setUser({ ...user, [name]: value });
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log(user);
-    setUser(null);
+    //setUser(null);
   };
 
-  useTitle("Sign up");
-  const nevigate = useNavigate();
   return (
     <div className="h-screen bg-slate-100 flex justify-center items-center">
       <div className="w-full max-w-xl mx-auto bg-white h-auto sm:rounded-xl sm:p-8 p-4 shadow-md">
@@ -47,7 +49,7 @@ export default function Signup() {
         </div>
         <div className="px-4 space-y-8">
           <h2 className="text-black text-3xl font-bold ">Sign up</h2>
-          <div className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className=" flex items-center w-full">
               <AiOutlineUser className="text-slate-600 text-2xl mr-3" />
               <div className="flex justify-between w-full">
@@ -149,8 +151,8 @@ export default function Signup() {
 
             <div className="flex flex-col py-2 items-center justify-center">
               <button
+                type="submit"
                 className="px-4 py-2 text-white bg-blue-600 w-full max-w-md rounded-xl font-semibold"
-                onClick={handleSubmit}
               >
                 Signup
               </button>
@@ -162,7 +164,7 @@ export default function Signup() {
                 </Link>
               </h3>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

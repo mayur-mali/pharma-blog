@@ -16,6 +16,22 @@ export default function Login() {
 
   useTitle("Log in");
   const nevigate = useNavigate();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleOnChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setUser({ ...user, [name]: value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(user);
+    //setUser(null);
+  };
+
   return (
     <div className="h-screen bg-slate-100 flex justify-center items-center">
       <div className="w-full max-w-xl mx-auto bg-white h-auto sm:rounded-xl sm:p-8 p-4 shadow-md">
@@ -34,15 +50,15 @@ export default function Login() {
         <div className="px-4 space-y-8">
           <h2 className="text-black text-3xl font-bold ">Log In</h2>
 
-          <div className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex  items-center  relative">
               <span className="text-slate-600 text-2xl"> @</span>
               <input
                 type="email"
                 name="email"
                 id="email"
-                //value={user.email}
-                //onChange={handleOnChange}
+                value={user.email}
+                onChange={handleOnChange}
                 required
                 placeholder="Email"
                 className="w-full border-b py-2 focus:outline-none ml-3 placeholder-transparent peer "
@@ -60,8 +76,8 @@ export default function Login() {
                 type="password"
                 name="password"
                 id="password"
-                //value={user.password}
-                //onChange={handleOnChange}
+                value={user.password}
+                onChange={handleOnChange}
                 required
                 placeholder="Password"
                 className="w-full border-b py-2 focus:outline-none ml-3 placeholder-transparent peer"
@@ -74,7 +90,10 @@ export default function Login() {
               </label>
             </div>
             <div className="flex flex-col py-2 items-center justify-center">
-              <button className="px-4 py-2 text-white bg-blue-600 w-full max-w-md rounded-xl font-semibold">
+              <button
+                type="submit"
+                className="px-4 py-2 text-white bg-blue-600 w-full max-w-md rounded-xl font-semibold"
+              >
                 Login
               </button>
               <div className="relative w-full mt-12">
@@ -110,7 +129,7 @@ export default function Login() {
                 </Link>
               </h3>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
