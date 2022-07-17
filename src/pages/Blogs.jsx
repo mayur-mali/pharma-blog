@@ -20,6 +20,9 @@ export default function Blogs() {
       <FeaturedPost />
       </div>
     <AllPost /> */}
+      <div className="py-4 px-6 max-w-7xl mx-auto w-full">
+        <FeaturedPost />
+      </div>
       <div className="py-4 max-w-7xl mx-auto w-full">
         <MostRecentPost />
       </div>

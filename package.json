@@ -22,6 +22,7 @@
     "react-twitter-login": "^1.5.0",
     "suneditor": "^2.43.6",
     "suneditor-react": "^3.4.0",
+    "swiper": "^8.3.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
