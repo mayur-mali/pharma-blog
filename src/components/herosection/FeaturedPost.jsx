@@ -59,13 +59,39 @@ export default function FeaturedPost() {
                       <>
                         <div className=" relative  rounded-xl overflow-hidden">
                           <div className="w-full h-96 relative">
-                            <img
-                              src={post.photo}
-                              alt={post.title}
-                              className="w-full h-full transition duration-500  object-cover"
-                            />
+                            {post.photo && (
+                              <>
+                                <img
+                                  src={post.photo}
+                                  alt={post.title}
+                                  className="w-full h-full   object-cover"
+                                />
+                                <h2 className="text-white p-4	font-extrabold absolute capitalize inset-14  md:text-xl text-lg md:line-clamp-2">
+                                  {post.title}
+                                </h2>
+                              </>
+                            )}
+                            {!post.photo && (
+                              <>
+                                <img
+                                  src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                                  alt="{post.title}"
+                                  className="w-full h-full  object-cover"
+                                />
+                                <h2 className="text-white p-4 backdrop-blur-[1px]	font-extrabold absolute capitalize inset-14  md:text-xl text-lg md:line-clamp-2">
+                                  {post.title}
+                                </h2>
+                              </>
+                            )}
                           </div>
-                          <div className="absolute w-full h-full top-0 bg-black bg-opacity-50"></div>
+                          <div className="absolute w-full flex justify-start items-end h-full top-0 bg-black bg-opacity-20">
+                            <div className="bg-black p-4 bg-opacity-30 w-full h-40">
+                              <h2 className="text-white 	font-extrabold  w-full capitalize  md:text-3xl text-lg md:line-clamp-2">
+                                {post.title}
+                              </h2>
+                              <span className="text-slate-900">#pharmacy</span>
+                            </div>
+                          </div>
                         </div>
                         {/* 
                     <div className="flex flex-1 flex-col mt-5 py-2 pr-2 justify-between space-y-4">
