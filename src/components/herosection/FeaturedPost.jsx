@@ -1,10 +1,12 @@
 import { axiosInstance } from "../../config";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
+import { Navigation } from "swiper";
 import dayjs from "dayjs";
 export default function FeaturedPost() {
+  const swiper = useSwiper();
   var relativeTime = require("dayjs/plugin/relativeTime");
   dayjs.extend(relativeTime);
   const [postData, setPostData] = useState([]);
@@ -35,14 +37,34 @@ export default function FeaturedPost() {
         </div>
         <Swiper
           spaceBetween={50}
-          slidesPerView={2}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
+          modules={[Navigation]}
+          breakpoints={{
+            240: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 40,
+            },
+            1024: {
+              slidesPerView: 2,
+              spaceBetween: 50,
+            },
+          }}
+          navigation={{
+            nextEl: ".next",
+            prevEl: ".prev",
+          }}
         >
-          <div className="grid md:grid-cols-2 md:mt-12 mt-8 grid-cols-1 gap-x-10">
+          <div className="">
             {postData.slice(0, 8).map((post, index) => (
               <SwiperSlide key={index}>
-                <div className="col-span-1">
+                <div className="">
                   {loading && (
                     <div>
                       <div className="flex-none  animate-pulse w-full md:h-96 sm:h-60 h-40 rounded-xl bg-slate-900 mr-4"></div>
@@ -58,7 +80,7 @@ export default function FeaturedPost() {
                     {!loading && (
                       <>
                         <div className=" relative  rounded-xl overflow-hidden">
-                          <div className="w-full h-96 relative">
+                          <div className="w-full md:h-96 h-64 relative">
                             {post.photo && (
                               <>
                                 <img
@@ -66,9 +88,6 @@ export default function FeaturedPost() {
                                   alt={post.title}
                                   className="w-full h-full   object-cover"
                                 />
-                                <h2 className="text-white p-4	font-extrabold absolute capitalize inset-14  md:text-xl text-lg md:line-clamp-2">
-                                  {post.title}
-                                </h2>
                               </>
                             )}
                             {!post.photo && (
@@ -78,14 +97,11 @@ export default function FeaturedPost() {
                                   alt="{post.title}"
                                   className="w-full h-full  object-cover"
                                 />
-                                <h2 className="text-white p-4 backdrop-blur-[1px]	font-extrabold absolute capitalize inset-14  md:text-xl text-lg md:line-clamp-2">
-                                  {post.title}
-                                </h2>
                               </>
                             )}
                           </div>
                           <div className="absolute w-full flex justify-start items-end h-full top-0 bg-black bg-opacity-20">
-                            <div className="bg-black p-4 bg-opacity-30 w-full h-40">
+                            <div className="bg-black p-4 bg-opacity-30 w-full md:h-40 h-28">
                               <h2 className="text-white 	font-extrabold  w-full capitalize  md:text-3xl text-lg md:line-clamp-2">
                                 {post.title}
                               </h2>
@@ -149,6 +165,8 @@ export default function FeaturedPost() {
             ))}
           </div>
         </Swiper>
+        <div className="prev bg-black text-white p-2">prev</div>
+        <div className="next bg-black text-white p-2">next</div>
       </div>
     </div>
   );
