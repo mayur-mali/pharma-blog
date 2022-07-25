@@ -2,18 +2,18 @@ import { axiosInstance } from "../../config";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import "swiper/css";
 import { Navigation } from "swiper";
 import dayjs from "dayjs";
 export default function FeaturedPost() {
-  const swiper = useSwiper();
   var relativeTime = require("dayjs/plugin/relativeTime");
   dayjs.extend(relativeTime);
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     const getPost = async () => {
-      setLoading(true);
       try {
         const data = await axiosInstance.get("/posts");
         setPostData(data.data);
@@ -25,13 +25,13 @@ export default function FeaturedPost() {
     };
     getPost();
 
-    //return () => clearTimeout(load);
+    // return () => clearTimeout(load);
   }, []);
   return (
     <div>
       <div>
         <div className="flex justify-between items-center pr-8">
-          <h1 className="md:text-7xl text-3xl font-extrabold text-black">
+          <h1 className="md:text-7xl text-3xl mb-4 font-extrabold text-black">
             Featured Post
           </h1>
         </div>
@@ -44,7 +44,7 @@ export default function FeaturedPost() {
               spaceBetween: 20,
             },
             640: {
-              slidesPerView: 1,
+              slidesPerView: 2,
               spaceBetween: 20,
             },
             768: {
@@ -61,10 +61,10 @@ export default function FeaturedPost() {
             prevEl: ".prev",
           }}
         >
-          <div className="">
+          <div>
             {postData.slice(0, 8).map((post, index) => (
               <SwiperSlide key={index}>
-                <div className="">
+                <div>
                   {loading && (
                     <div>
                       <div className="flex-none  animate-pulse w-full md:h-96 sm:h-60 h-40 rounded-xl bg-slate-900 mr-4"></div>
@@ -79,7 +79,7 @@ export default function FeaturedPost() {
                   <div className="flex text-black">
                     {!loading && (
                       <>
-                        <div className=" relative  rounded-xl overflow-hidden">
+                        <div className="relative flex-1  rounded-xl overflow-hidden">
                           <div className="w-full md:h-96 h-64 relative">
                             {post.photo && (
                               <>
@@ -109,54 +109,6 @@ export default function FeaturedPost() {
                             </div>
                           </div>
                         </div>
-                        {/* 
-                    <div className="flex flex-1 flex-col mt-5 py-2 pr-2 justify-between space-y-4">
-                      <Link to={`/post/${post.slug}`}>
-                        <h3 className="md:text-2xl sm:text-xl text-sm font-bold group-hover:text-gray-600 capitalize line-clamp-2">
-                          {post.title}
-                        </h3>
-                      </Link>
-                      <div>
-                        <ul className="flex text-xs items-center space-x-4">
-                          <li>
-                            <span className="p-1 bg-opacity-25 bg-purple-600 rounded-md text-white mr-2">
-                              #
-                            </span>
-                            pharmacy
-                          </li>
-                          <li>
-                            <span className="p-1 bg-opacity-25 bg-purple-600 rounded-md text-white mr-2">
-                              #
-                            </span>
-                            cogonocy
-                          </li>
-                          <li>
-                            <span className="p-1 bg-opacity-25 bg-purple-600 rounded-md text-white mr-2">
-                              #
-                            </span>
-                            cology
-                          </li>
-                          <li>
-                            <span className="p-1 bg-opacity-25 bg-purple-600 rounded-md text-white mr-2">
-                              #
-                            </span>
-                            pharma
-                          </li>
-                        </ul>
-                      </div>
-
-                      <h5 className="md:text-sm text-xs">
-                        Author @ {post.author.map((author) => author.name)} |
-                        <span className="text-xs ml-1">
-                          <span className="mr-1">Posted on</span>
-                          {dayjs(post.createdAt).format("DD/MM/YYYY")} |
-                          <span className="ml-1">
-                            {dayjs(post.createdAt).fromNow()}
-                          </span>
-                        </span>
-                      </h5>
-                    </div>
-                    */}
                       </>
                     )}
                   </div>
@@ -165,8 +117,14 @@ export default function FeaturedPost() {
             ))}
           </div>
         </Swiper>
-        <div className="prev bg-black text-white p-2">prev</div>
-        <div className="next bg-black text-white p-2">next</div>
+        <div className="flex justify-end text-3xl text-black mt-4 w-auto space-x-4 align-center">
+          <div className="prev  px-6 cursor-pointer">
+            <FaLongArrowAltLeft />
+          </div>
+          <div className="next  px-6 cursor-pointer">
+            <FaLongArrowAltRight />
+          </div>
+        </div>
       </div>
     </div>
   );
