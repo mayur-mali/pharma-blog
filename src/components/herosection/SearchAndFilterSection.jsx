@@ -10,9 +10,16 @@ export default function SearchAndFilterSection() {
         <img src={heroimg} alt="heroimage" className="mx-auto" />
         <div className="w-full flex flex-col space-y-4 items-center">
           {currentUser && (
-            <h1 className="md:text-5xl  text-4xl font-bold dark:text-white text-blue-600">
-              Welcome{" "}
-              <span className="text-black underline">{currentUser.name}</span>
+            <h1 className="md:text-5xl  capitalize text-4xl font-bold dark:text-white text-blue-600">
+              Welcome &nbsp;
+              {currentUser.username && (
+                <span className="text-black underline">
+                  {currentUser.username}
+                </span>
+              )}
+              {currentUser.name && (
+                <span className="text-black underline">{currentUser.name}</span>
+              )}
             </h1>
           )}
           {!currentUser && (

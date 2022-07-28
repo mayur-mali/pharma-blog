@@ -140,11 +140,18 @@ export default function Nav() {
                     onClick={() => setProfileMenu(!profileMenu)}
                   >
                     <span className="sr-only">Open user menu</span>
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src={currentUser.picture}
-                      alt={currentUser.name}
-                    />
+                    {currentUser.picture && (
+                      <img
+                        className="h-8 w-8 rounded-full"
+                        src={currentUser.picture}
+                        alt={currentUser.name}
+                      />
+                    )}
+                    {!currentUser.picture && (
+                      <h2 className="uppercase w-8 h-8 text-2xl rounded-full flex justify-center items-center">
+                        {currentUser.email.charAt(0)}
+                      </h2>
+                    )}
                   </button>
                 </div>
                 {profileMenu && (

@@ -23,7 +23,7 @@ export default function HeroSection() {
             <span className="block xl:inline underline-offset-2 underline">
               The Pharma
             </span>
-            {/* space */}
+
             <span className="block text-indigo-600 ml-4 xl:inline underline-offset-2 underline">
               Bloggers
             </span>
@@ -37,7 +37,7 @@ export default function HeroSection() {
             <div className="mt-4">
               <h1 className="text-black sm:text-lg md:text-5xl font-bold">
                 <span className="text-indigo-600 mr-2">Welcome !</span>
-                {currentUser.name}
+                {currentUser.username}
               </h1>
               <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
                 <Link to="/blogs" className="bg-black px-4 py-2 rounded-xl">

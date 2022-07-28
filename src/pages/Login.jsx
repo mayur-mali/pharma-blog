@@ -10,12 +10,14 @@ import { GoogleLogin } from "@react-oauth/google";
 
 import jwt_decode from "jwt-decode";
 import useTitle from "../customhooks/useTitle";
+import { axiosInstance } from "../config";
 
 export default function Login() {
-  const { dispatch } = useContext(AuthContext);
+  const { dispatch, isFetching } = useContext(AuthContext);
 
   useTitle("Log in");
   const nevigate = useNavigate();
+  const [error, setError] = useState("");
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -26,10 +28,24 @@ export default function Login() {
     let value = e.target.value;
     setUser({ ...user, [name]: value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
-    //setUser(null);
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axiosInstance.post("/auth/login", {
+        email: user.email,
+        password: user.password,
+      });
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      nevigate("/");
+    } catch (err) {
+      setError("something went wrong");
+      dispatch({ type: "LOGIN_FAILURE" });
+      setUser({
+        email: "",
+        password: "",
+      });
+    }
   };
 
   return (
@@ -49,7 +65,7 @@ export default function Login() {
         </div>
         <div className="px-4 space-y-8">
           <h2 className="text-black text-3xl font-bold ">Log In</h2>
-
+          <div className="trigger"></div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex  items-center  relative">
               <span className="text-slate-600 text-2xl"> @</span>
@@ -89,12 +105,17 @@ export default function Login() {
                 Password
               </label>
             </div>
+            {error && (
+              <div className="flex py-2 justify-center capitalize w-full text-red-500 items-center relative ">
+                <p>{error} </p>
+              </div>
+            )}
             <div className="flex flex-col py-2 items-center justify-center">
               <button
                 type="submit"
                 className="px-4 py-2 text-white bg-blue-600 w-full max-w-md rounded-xl font-semibold"
               >
-                Login
+                {isFetching ? "...." : "Login"}
               </button>
               <div className="relative w-full mt-12">
                 <hr className="mb-8" />
@@ -112,7 +133,7 @@ export default function Login() {
                     onSuccess={(credentialResponse) => {
                       const token = credentialResponse.credential;
                       var decoded = jwt_decode(token);
-                      dispatch({ type: "LOGIN", payload: decoded });
+                      dispatch({ type: "LOGIN_SUCCESS", payload: decoded });
                       localStorage.setItem("isLogin", true);
                       nevigate("/");
                     }}

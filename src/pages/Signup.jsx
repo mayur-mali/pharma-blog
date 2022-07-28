@@ -8,11 +8,12 @@ import { AuthContext } from "../context/AuthContext";
 
 import useTitle from "../customhooks/useTitle";
 import { useState } from "react";
+import { axiosInstance } from "../config";
 
 export default function Signup() {
   useTitle("Sign up");
   const nevigate = useNavigate();
-
+  const [error, setError] = useState("");
   const [user, setUser] = useState({
     fname: "",
     lname: "",
@@ -26,10 +27,22 @@ export default function Signup() {
     let value = e.target.value;
     setUser({ ...user, [name]: value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
-    //setUser(null);
+    try {
+      if (user.password === user.cpassword) {
+        const res = await axiosInstance.post("/auth/register", {
+          username: user.fname + "_" + user.lname,
+          email: user.email,
+          password: user.password,
+        });
+        nevigate("/login");
+      } else {
+        setError("password is not match");
+      }
+    } catch (error) {
+      setError("something went wrong");
+    }
   };
 
   return (
@@ -52,7 +65,7 @@ export default function Signup() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className=" flex items-center w-full">
               <AiOutlineUser className="text-slate-600 text-2xl mr-3" />
-              <div className="flex justify-between w-full">
+              <div className="flex justify-between md:gap-0 gap-y-4 md:flex-row flex-col w-full">
                 <div className="relative">
                   <input
                     type="text"
@@ -148,7 +161,11 @@ export default function Signup() {
                 Confirm Password
               </label>
             </div>
-
+            {error && (
+              <div className="flex py-2 justify-center capitalize w-full text-red-500 items-center relative ">
+                <p>{error} </p>
+              </div>
+            )}
             <div className="flex flex-col py-2 items-center justify-center">
               <button
                 type="submit"
