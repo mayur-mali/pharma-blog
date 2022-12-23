@@ -73,7 +73,7 @@ export default function MostRecentPost() {
             </>
           ) : (
             <>
-              {postData.slice(0, lastIndex).map((post, index) => (
+              {postData.map((post, index) => (
                 <XyzTransition
                   appear
                   xyz="fade-75% down-5  ease-out-back"

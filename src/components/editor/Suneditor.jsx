@@ -21,6 +21,7 @@ export default function Suneditor(props) {
 
   const nevigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
+
   const createPost = async () => {
     setLoding(true);
     try {
@@ -29,7 +30,7 @@ export default function Suneditor(props) {
         content,
         photo: props.coverurl,
         author: {
-          name: currentUser.name,
+          name: currentUser.username,
           imgurl: currentUser.picture,
         },
       });

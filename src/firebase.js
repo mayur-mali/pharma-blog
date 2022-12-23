@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDwH_VZiXXhv0xreqLew-MtMZ8gt__uAXc",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "image-storege.firebaseapp.com",
   projectId: "image-storege",
   storageBucket: "image-storege.appspot.com",
-  messagingSenderId: "389904354706",
-  appId: "1:389904354706:web:9d7a40a89afe039ab1c54b",
+  messagingSenderId: process.env.FIREBASE_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
