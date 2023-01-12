@@ -11,8 +11,8 @@ export default function TodaysHighlight() {
     const getPost = async () => {
       setLoading(true);
       try {
-        const data = await axiosInstance.get("/posts/views/max");
-        setPostData(data.data.post);
+        const data = await axiosInstance.get("/posts/views");
+        setPostData(data.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -21,7 +21,7 @@ export default function TodaysHighlight() {
     };
     getPost();
   }, []);
-  console.log(postData);
+
   return (
     <>
       {postData.length > 0 && (

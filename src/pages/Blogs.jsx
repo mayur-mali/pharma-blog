@@ -14,12 +14,6 @@ export default function Blogs() {
   return (
     <>
       <SearchAndFilterSection />
-
-      {/* 
-      <div className="py-10 max-w-7xl px-6 mx-auto w-full">
-      <FeaturedPost />
-      </div>
-    <AllPost /> */}
       <div className="py-4 px-6 max-w-7xl mx-auto w-full">
         <FeaturedPost />
       </div>

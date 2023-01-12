@@ -50,7 +50,7 @@ function App() {
           }
         />
 
-        <Route path="/post/:slug" element={<SingleBlog />} />
+        <Route path="/post/:id/:slug" element={<SingleBlog />} />
         <Route
           path="/createpost"
           element={

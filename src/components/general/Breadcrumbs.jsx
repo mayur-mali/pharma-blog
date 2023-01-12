@@ -37,14 +37,10 @@ export default function Breadcrumbs(props) {
                   >
                     <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"></path>
                   </svg>
-                  {props.data.map((data, index) => (
-                    <h3
-                      className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
-                      key={index}
-                    >
-                      {data.title}
-                    </h3>
-                  ))}
+
+                  <h3 className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                    {props.data.title}
+                  </h3>
                 </div>
               </li>
             </ol>

@@ -133,7 +133,7 @@ export default function MostRecentPost() {
                           </div>
                         </div>
                         <div>
-                          <Link to={`/post/${post.slug}`}>
+                          <Link to={`/post/${post._id}/${post.slug}`}>
                             <div className="px-2 py-1 rounded-md bg-blue-500 text-white">
                               Read more
                             </div>

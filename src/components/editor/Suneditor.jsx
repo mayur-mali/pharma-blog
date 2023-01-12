@@ -30,8 +30,8 @@ export default function Suneditor(props) {
         content,
         photo: props.coverurl,
         author: {
-          name: currentUser.username,
-          imgurl: currentUser.picture,
+          name: currentUser.name || currentUser.username,
+          imgurl: currentUser.picture || currentUser.profilePic,
         },
       });
 
@@ -41,6 +41,7 @@ export default function Suneditor(props) {
       }, 2000);
     } catch (error) {
       console.log(error);
+      setLoding(false);
     }
   };
   return (

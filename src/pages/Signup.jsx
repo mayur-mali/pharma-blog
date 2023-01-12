@@ -29,13 +29,16 @@ export default function Signup() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       if (user.password === user.cpassword) {
         const res = await axiosInstance.post("/auth/register", {
           username: user.fname + "_" + user.lname,
           email: user.email,
           password: user.password,
+          profilePic: "https://api.dicebear.com/5.x/fun-emoji/svg?seed=Mittens",
         });
+
         nevigate("/login");
       } else {
         setError("password is not match");

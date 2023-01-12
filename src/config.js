@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://tame-lime-alligator-slip.cyclic.app/api",
+  baseURL: "http://localhost:5000/api",
 });
