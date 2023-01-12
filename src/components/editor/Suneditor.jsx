@@ -32,6 +32,7 @@ export default function Suneditor(props) {
         author: {
           name: currentUser.name || currentUser.username,
           imgurl: currentUser.picture || currentUser.profilePic,
+          authorId: currentUser._id,
         },
       });
 

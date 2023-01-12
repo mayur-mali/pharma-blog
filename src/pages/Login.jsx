@@ -133,6 +133,7 @@ export default function Login() {
                     onSuccess={(credentialResponse) => {
                       const token = credentialResponse.credential;
                       var decoded = jwt_decode(token);
+                      console.log(decoded);
                       dispatch({ type: "LOGIN_SUCCESS", payload: decoded });
                       localStorage.setItem("isLogin", true);
                       nevigate("/");
