@@ -62,12 +62,10 @@ export default function CreateNewPost() {
     const desertRef = ref(storage, converImgurl);
     deleteObject(desertRef)
       .then(() => {
-        // File deleted successfully
         setConverImgurl(null);
-        console.log(desertRef);
       })
       .catch((error) => {
-        // Uh-oh, an error occurred!
+        console.log(error);
       });
   };
 

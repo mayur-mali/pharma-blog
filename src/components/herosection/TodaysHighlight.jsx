@@ -4,9 +4,10 @@ import SectionsTitle from "../general/SectionsTitle";
 
 export default function TodaysHighlight() {
   const [postData, setPostData] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
 
-  const [lastIndex, setLastIndex] = useState(9);
+  // const [lastIndex, setLastIndex] = useState(9);
   useEffect(() => {
     const getPost = async () => {
       setLoading(true);

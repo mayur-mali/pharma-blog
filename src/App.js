@@ -8,13 +8,13 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import SingleBlog from "./pages/SingleBlog";
 import CreatePost from "./pages/CreatePost";
+import EditPost from "./components/herosection/EditPost";
 import Footer from "./components/general/Footer";
 import useTitle from "./customhooks/useTitle";
-import Nav from "./components/general/Nav";
+
 import ScrollToTop from "./components/general/ScrollToTop";
 
 function App() {
-  //const currentUser = false;
   useTitle("pharma blog app");
   const { currentUser } = useContext(AuthContext);
   const RequireAuth = ({ children }) => {
@@ -25,9 +25,7 @@ function App() {
     return (
       <div className="w-full bg-[#f5f5f5] font-workSans pt-24 text-white">
         <div>
-          {/* <Navbar /> */}
-
-          <Nav />
+          <Navbar />
         </div>
         {children}
         <>
@@ -50,12 +48,20 @@ function App() {
           }
         />
 
-        <Route path="/post/:id/:slug" element={<SingleBlog />} />
+        <Route path="/blog/:id/:slug" element={<SingleBlog />} />
         <Route
           path="/createpost"
           element={
             <RequireAuth>
               <CreatePost />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/editpost/:id"
+          element={
+            <RequireAuth>
+              <EditPost />
             </RequireAuth>
           }
         />

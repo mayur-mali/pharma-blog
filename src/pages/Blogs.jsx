@@ -6,7 +6,6 @@ import TodaysHighlight from "../components/herosection/TodaysHighlight";
 import MostRecentPost from "../components/herosection/MostRecentPost";
 import CreateNewPostBtn from "../components/general/CreateNewPostBtn";
 import { AuthContext } from "../context/AuthContext";
-import AllPost from "../components/herosection/AllPost";
 
 export default function Blogs() {
   useTitle("blogs");

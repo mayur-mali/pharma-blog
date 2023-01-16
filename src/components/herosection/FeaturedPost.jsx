@@ -1,7 +1,7 @@
 import { axiosInstance } from "../../config";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+
+import { Swiper, SwiperSlide } from "swiper/react";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import "swiper/css";
 import { Navigation } from "swiper";

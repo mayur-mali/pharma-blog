@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import signupImg from "../static/assets/svg/signup_screen.svg";
 import { AiOutlineLock, AiOutlineUser } from "react-icons/ai";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
-
-import { AuthContext } from "../context/AuthContext";
 
 import useTitle from "../customhooks/useTitle";
 import { useState } from "react";
@@ -32,11 +30,12 @@ export default function Signup() {
 
     try {
       if (user.password === user.cpassword) {
+        // eslint-disable-next-line no-unused-vars
         const res = await axiosInstance.post("/auth/register", {
           username: user.fname + "_" + user.lname,
           email: user.email,
           password: user.password,
-          profilePic: "https://api.dicebear.com/5.x/fun-emoji/svg?seed=Mittens",
+          profilePic: `https://ui-avatars.com/api/?name=${user.fname}+${user.lname}`,
         });
 
         nevigate("/login");

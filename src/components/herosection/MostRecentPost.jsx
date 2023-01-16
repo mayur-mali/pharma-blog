@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import SectionsTitle from "../general/SectionsTitle";
+import EditPost from "../herosection/EditPost";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import "@animxyz/core";
 import { XyzTransition } from "@animxyz/react";
@@ -14,14 +15,17 @@ export default function MostRecentPost() {
   const { currentUser } = useContext(AuthContext);
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [editPost, setEditPost] = useState(false);
   const [contentLoading, setContentLoading] = useState(false);
   const [lastIndex, setLastIndex] = useState(9);
   useEffect(() => {
     const getPost = async () => {
       setLoading(true);
       try {
-        const data = await axiosInstance.get("/posts");
-        setPostData(data.data);
+        // const data = await axiosInstance.get("/posts");
+        const data1 = await axiosInstance.get("/blog");
+        console.log(data1.data);
+        setPostData(data1.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -31,15 +35,19 @@ export default function MostRecentPost() {
     getPost();
   }, []);
 
+  const setEditPostData = async (data) => {
+    console.log(data);
+  };
+
   const deletePost = async (id) => {
-    try {
-      await axiosInstance.delete(`/posts/${id}`, {
-        username: currentUser.username,
-      });
-      setPostData(postData.filter((item) => item._id !== id));
-    } catch (error) {
-      setLoading(false);
-    }
+    console.log(id, { userid: currentUser._id });
+    // const user = currentUser._id;
+    // try {
+    //   await axiosInstance.delete(`/blog/${id}`, { data: { user } });
+    //   setPostData(postData.filter((item) => item._id !== id));
+    // } catch (error) {
+    //   setLoading(false);
+    // }
   };
 
   const seemorepost = () => {
@@ -84,24 +92,24 @@ export default function MostRecentPost() {
             </>
           ) : (
             <>
-              {postData.map((post, index) => (
+              {postData?.map((post) => (
                 <XyzTransition
                   appear
                   xyz="fade-75% down-5  ease-out-back"
-                  key={index}
+                  key={post._id}
                 >
                   <div className="col-span-1   bg-white shadow-md h-full rounded-lg overflow-hidden">
                     <div className="relative w-full  flex-none h-56">
-                      {post.photo && (
+                      {post.image && (
                         <>
                           <img
-                            src={post.photo}
+                            src={post.image}
                             alt={post.title}
                             className="w-full h-full object-cover"
                           />
                         </>
                       )}
-                      {!post.photo && (
+                      {!post.image && (
                         <>
                           <img
                             src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
@@ -114,30 +122,24 @@ export default function MostRecentPost() {
                         <div className="flex mt-3 w-full justify-between">
                           {currentUser && (
                             <>
-                              {currentUser?._id === post.author[0].authorId && (
+                              {currentUser?._id === post.user._id && (
                                 <>
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="w-6 h-6 cursor-pointer"
-                                    onClick={() =>
-                                      console.log(
-                                        "edit post",
-                                        currentUser._id,
-                                        post._id
-                                      )
-                                    }
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
-                                    />
-                                  </svg>
-
+                                  <Link to={`/editpost/${post._id}`}>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth={1.5}
+                                      stroke="currentColor"
+                                      className="w-6 h-6 cursor-pointer"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                                      />
+                                    </svg>
+                                  </Link>
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -178,12 +180,12 @@ export default function MostRecentPost() {
                         <div className="flex space-x-4 items-start">
                           <img
                             className="h-10 w-10 rounded-full object-cover"
-                            src={post.author.map((user) => user.imgurl)}
+                            src={post.user?.profilePic}
                             alt={post.title}
                           />
                           <div>
                             <h5 className="text-sm text-black capitalize">
-                              {post.author.map((author) => author.name)}
+                              {post.user?.username}
                             </h5>
                             <p className="text-xs text-gray-600">
                               {dayjs(post.createdAt).format("LL")}
@@ -191,7 +193,7 @@ export default function MostRecentPost() {
                           </div>
                         </div>
                         <div>
-                          <Link to={`/post/${post._id}/${post.slug}`}>
+                          <Link to={`/blog/${post._id}/${post.slug}`}>
                             <div className="px-2 py-1 rounded-md bg-blue-500 text-white">
                               Read more
                             </div>

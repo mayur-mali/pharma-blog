@@ -26,8 +26,9 @@ export default function SingleBlog() {
   useEffect(() => {
     const getPost = async () => {
       try {
-        const data = await axiosInstance.get(`/posts/${id}/${slug}`);
-        await axiosInstance.put("/posts/views/" + id);
+        const data = await axiosInstance.get(`/blog/${id}`);
+        await axiosInstance.put("/blog/view/" + id);
+        console.log(data.data);
         setData(data.data);
         setLoading(false);
       } catch (error) {
@@ -35,7 +36,7 @@ export default function SingleBlog() {
       }
     };
     getPost();
-  }, [slug]);
+  }, [id, slug]);
 
   // useEffect(() => {
   //   const loading = setTimeout(() => {
@@ -59,16 +60,16 @@ export default function SingleBlog() {
               <div className="lg:col-span-3 col-span-1 text-black ">
                 <div key={data._id}>
                   <div className="w-full mb-4 md:h-80 h-96 relative p-2">
-                    {data.photo && (
+                    {data.image && (
                       <>
                         <img
-                          src={data.photo}
+                          src={data.image}
                           alt={data.title}
                           className="w-full rounded-lg h-full object-cover shadow-2xl"
                         />
                       </>
                     )}
-                    {!data.photo && (
+                    {!data.image && (
                       <>
                         <img
                           src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
@@ -97,14 +98,14 @@ export default function SingleBlog() {
                     </h1>
                     <div className="flex my-1 p-4 items-center space-x-2">
                       <img
-                        src={data.author.map((user) => user.imgurl)}
-                        alt={data.author.map((user) => user.name)}
+                        src={data.user?.profilePic}
+                        alt={data.user?.profilePic}
                         className="w-8 h-8 rounded-full"
                       />
                       <div>
                         <h2 className="text-sm ">
                           <span className="hover:text-blue-800 font-bold cursor-pointer">
-                            {data.author.map((user) => user.name)} |
+                            {data.user?.username} |
                             {dayjs(data.createdAt).fromNow()}
                           </span>
                         </h2>
@@ -113,9 +114,9 @@ export default function SingleBlog() {
 
                     <div
                       className="mt-8 sun-editor-editable md:!text-xl !text-lg !text-black !tracking-wide"
-                      dangerouslySetInnerHTML={createMarkup(data.content)}
+                      dangerouslySetInnerHTML={createMarkup(data.body)}
                     ></div>
-                    <Discussion user={data} />
+                    {/*<Discussion user={data} />*/}
                   </div>
                 </div>
               </div>

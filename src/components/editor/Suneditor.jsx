@@ -25,15 +25,11 @@ export default function Suneditor(props) {
   const createPost = async () => {
     setLoding(true);
     try {
-      await axiosInstance.post("/posts/", {
+      await axiosInstance.post("/blog/", {
         title: props.title,
-        content,
-        photo: props.coverurl,
-        author: {
-          name: currentUser.name || currentUser.username,
-          imgurl: currentUser.picture || currentUser.profilePic,
-          authorId: currentUser._id,
-        },
+        body: content,
+        image: props.coverurl,
+        user: currentUser._id,
       });
 
       setTimeout(() => {
