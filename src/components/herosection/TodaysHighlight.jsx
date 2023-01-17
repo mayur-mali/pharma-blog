@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { axiosInstance } from "../../config";
 import SectionsTitle from "../general/SectionsTitle";
 
@@ -12,7 +13,7 @@ export default function TodaysHighlight() {
     const getPost = async () => {
       setLoading(true);
       try {
-        const data = await axiosInstance.get("/posts/views");
+        const data = await axiosInstance.get("/blog/views");
         setPostData(data.data);
         setLoading(false);
       } catch (error) {
@@ -30,19 +31,35 @@ export default function TodaysHighlight() {
           <SectionsTitle title="Today Highlights" />
 
           <div className="grid lg:grid-cols-4 mt-8 grid-cols-1 gap-5">
-            {postData?.map((post, index) => (
+            {postData?.map((post) => (
               <div
-                className="lg:col-span-2 col-span-1 flex md:flex-row flex-col text-black"
-                key={index}
+                className="lg:col-span-2 col-span-1 flex md:flex-row  flex-col text-black"
+                key={post._id}
               >
-                <div className="flex-none md:w-56 md:h-40 w-full h-48 rounded-xl bg-slate-300 mr-4"></div>
+                <div className="flex-none md:w-56 md:h-40 w-full h-48 overflow-hidden  rounded-xl  mr-4">
+                  {post.image ? (
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="object-cover h-full w-full"
+                    />
+                  ) : (
+                    <img
+                      src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                      alt={post.title}
+                      className="object-cover h-full w-full"
+                    />
+                  )}
+                </div>
                 <div className="flex flex-col py-2 pr-2 justify-between space-y-2">
-                  <h3 className="text-lg font-bold capitalize line-clamp-2">
-                    {post.title}
-                  </h3>
-                  <h5 className="text-sm">
-                    Author @ {post.author.map((author) => author.name)}
-                  </h5>
+                  <Link to={`/blog/${post._id}/${post.slug}`}>
+                    <h3 className="text-lg font-bold capitalize line-clamp-2">
+                      {post.title}
+                    </h3>
+                  </Link>
+                  {post.user && (
+                    <h5 className="text-sm">Author @ {post.user.username}</h5>
+                  )}
                 </div>
               </div>
             ))}

@@ -35,19 +35,16 @@ export default function MostRecentPost() {
     getPost();
   }, []);
 
-  const setEditPostData = async (data) => {
-    console.log(data);
-  };
+  const setEditPostData = async (data) => {};
 
   const deletePost = async (id) => {
-    console.log(id, { userid: currentUser._id });
-    // const user = currentUser._id;
-    // try {
-    //   await axiosInstance.delete(`/blog/${id}`, { data: { user } });
-    //   setPostData(postData.filter((item) => item._id !== id));
-    // } catch (error) {
-    //   setLoading(false);
-    // }
+    const user = currentUser._id;
+    try {
+      await axiosInstance.delete(`/blog/${id}`, { data: { user } });
+      setPostData(postData.filter((item) => item._id !== id));
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   const seemorepost = () => {

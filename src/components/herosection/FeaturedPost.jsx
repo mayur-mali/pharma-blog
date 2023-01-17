@@ -6,6 +6,7 @@ import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import "swiper/css";
 import { Navigation } from "swiper";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
 export default function FeaturedPost() {
   var relativeTime = require("dayjs/plugin/relativeTime");
   dayjs.extend(relativeTime);
@@ -15,7 +16,7 @@ export default function FeaturedPost() {
     setLoading(true);
     const getPost = async () => {
       try {
-        const data = await axiosInstance.get("/posts");
+        const data = await axiosInstance.get("/blog");
         setPostData(data.data);
         setLoading(false);
       } catch (error) {
@@ -84,10 +85,10 @@ export default function FeaturedPost() {
                         <>
                           <div className="relative flex-1  rounded-xl overflow-hidden">
                             <div className="w-full md:h-96 h-64 relative">
-                              {post.photo && (
+                              {post.image && (
                                 <>
                                   <img
-                                    src={post.photo}
+                                    src={post.image}
                                     alt={post.title}
                                     className="w-full h-full   object-cover"
                                   />
@@ -105,9 +106,11 @@ export default function FeaturedPost() {
                             </div>
                             <div className="absolute w-full flex justify-start items-end h-full top-0 bg-black bg-opacity-20">
                               <div className="bg-black p-4 bg-opacity-30 w-full md:h-40 h-28">
-                                <h2 className="text-white 	font-extrabold  w-full capitalize  md:text-3xl text-lg md:line-clamp-2">
-                                  {post.title}
-                                </h2>
+                                <Link to={`/blog/${post._id}/${post.slug}`}>
+                                  <h2 className="text-white 	font-extrabold  w-full capitalize  md:text-3xl text-lg md:line-clamp-2">
+                                    {post.title}
+                                  </h2>
+                                </Link>
                                 <span className="text-slate-900">
                                   #pharmacy
                                 </span>
