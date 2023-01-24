@@ -12,6 +12,7 @@ export default function Signup() {
   useTitle("Sign up");
   const nevigate = useNavigate();
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
   const [user, setUser] = useState({
     fname: "",
     lname: "",
@@ -26,6 +27,7 @@ export default function Signup() {
     setUser({ ...user, [name]: value });
   };
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     try {
@@ -37,12 +39,14 @@ export default function Signup() {
           password: user.password,
           profilePic: `https://ui-avatars.com/api/?name=${user.fname}+${user.lname}`,
         });
-
+        setLoading(false);
         nevigate("/login");
       } else {
+        setLoading(false);
         setError("password is not match");
       }
     } catch (error) {
+      setLoading(false);
       setError("something went wrong");
     }
   };
@@ -168,14 +172,30 @@ export default function Signup() {
                 <p>{error} </p>
               </div>
             )}
+            <button
+              type="submit"
+              className="w-full flex disabled:bg-gray-400 justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              {isLoading ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 animate-spin"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                  />
+                </svg>
+              ) : (
+                "SING UP "
+              )}
+            </button>
             <div className="flex flex-col py-2 items-center justify-center">
-              <button
-                type="submit"
-                className="px-4 py-2 text-white bg-blue-600 w-full max-w-md rounded-xl font-semibold"
-              >
-                Signup
-              </button>
-
               <h3 className="mt-4 font-semibold">
                 Already have an account?
                 <Link to="/login" className="text-blue-600 ml-2">

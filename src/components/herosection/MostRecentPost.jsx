@@ -22,7 +22,6 @@ export default function MostRecentPost() {
     const getPost = async () => {
       setLoading(true);
       try {
-        // const data = await axiosInstance.get("/posts");
         const data1 = await axiosInstance.get("/blog");
         setPostData(data1.data);
         setLoading(false);
