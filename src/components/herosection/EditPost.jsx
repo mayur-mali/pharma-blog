@@ -25,8 +25,8 @@ export default function EditPost() {
   const [content, setContent] = useState(null);
   const { id } = useParams();
   const title = useRef();
-  const body = useRef();
-  const image = useRef();
+  // const body = useRef();
+  // const image = useRef();
   const handleOnChange = (editorContent) => setContent(editorContent);
   useEffect(() => {
     const getPost = async () => {
@@ -38,16 +38,16 @@ export default function EditPost() {
       }
     };
     getPost();
-  }, []);
+  }, [id]);
   const editPost = async (e) => {
     e.preventDefault();
-    //console.log(coverPic);
+
     try {
       const post = await axiosInstance.put(`/blog/${id}`, {
         user: currentUser._id,
         title: title.current.value,
         body: content,
-        image: "coverPic",
+        image: coverPic,
       });
       if (post.status === 200) {
         console.log(post);

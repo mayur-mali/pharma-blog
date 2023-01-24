@@ -3,32 +3,36 @@ import { Link, useParams } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaShare } from "react-icons/fa";
 import { FcLike } from "react-icons/fc";
+import { FiEdit3 } from "react-icons/fi";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { axiosInstance } from "../config";
 import useTitle from "../customhooks/useTitle";
 import Breadcrumbs from "../components/general/Breadcrumbs";
-import Discussion from "../components/general/Discussion";
 import dayjs from "dayjs";
+import ImageModal from "../components/general/ImageModal";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 export default function SingleBlog() {
   var relativeTime = require("dayjs/plugin/relativeTime");
   dayjs.extend(relativeTime);
-
+  const { currentUser } = useContext(AuthContext);
   function createMarkup(content) {
     return { __html: content };
   }
   const { id, slug } = useParams();
-  // console.log({ id, slug });
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   useTitle(slug);
   useEffect(() => {
+    setLoading(true);
     const getPost = async () => {
       try {
         const data = await axiosInstance.get(`/blog/${id}`);
         await axiosInstance.put("/blog/view/" + id);
-        console.log(data.data);
+
         setData(data.data);
         setLoading(false);
       } catch (error) {
@@ -38,13 +42,9 @@ export default function SingleBlog() {
     getPost();
   }, [id, slug]);
 
-  // useEffect(() => {
-  //   const loading = setTimeout(() => {
-  //     setLoading(false);
-  //   }, 2000);
-
-  //   return () => clearTimeout(loading);
-  // }, []);
+  const imageModal = (url) => {
+    setOpenModal(true);
+  };
 
   return (
     <>
@@ -54,7 +54,7 @@ export default function SingleBlog() {
         </div>
       ) : (
         <div className="w-full min-h-full pb-8 bg-[#f5f5f5]">
-          <div className="max-w-6xl md:p-4 md:rounded-xl bg-white mx-auto w-full">
+          <div className="max-w-6xl md:p-4 md:rounded-xl md:rounded-t-none bg-white mx-auto w-full">
             {<Breadcrumbs data={data} />}
             <div className="grid lg:grid-cols-4 gap-6 grid-cols-1">
               <div className="lg:col-span-3 col-span-1 text-black ">
@@ -65,7 +65,8 @@ export default function SingleBlog() {
                         <img
                           src={data.image}
                           alt={data.title}
-                          className="w-full rounded-lg h-full object-cover shadow-2xl"
+                          onClick={() => imageModal(data.image)}
+                          className="w-full cursor-pointer rounded-lg h-full object-cover shadow-2xl"
                         />
                       </>
                     )}
@@ -78,10 +79,17 @@ export default function SingleBlog() {
                         />
                       </>
                     )}
-                    <div className="right-5 w-[100px] flex items-center justify-between -bottom-4 absolute">
+                    <div className="right-5 space-x-3 flex items-center justify-between -bottom-4 absolute">
                       <div className="p-3 rounded-full bg-white bg-opacity-90">
                         <FaShare className="text-xl text-gray-800" />
                       </div>
+                      {currentUser?._id === data.user._id && (
+                        <div className="p-3 rounded-full bg-white bg-opacity-90">
+                          <Link to={`/editpost/${data._id}`}>
+                            <FiEdit3 className="text-xl text-gray-800" />
+                          </Link>
+                        </div>
+                      )}
                       <div className="p-3 rounded-full bg-white bg-opacity-90">
                         <FcLike className="text-xl" />
                       </div>
@@ -120,9 +128,36 @@ export default function SingleBlog() {
                   </div>
                 </div>
               </div>
-              <div className="bg-gray-100 sticky top-0 col-span-1 min-w-md w-full h-64"></div>
+              <div className="bg-gray-100 space-y-4 sticky top-0 p-4 col-span-1 min-w-md w-full h-64">
+                <div className="flex space-x-4 items-center">
+                  <img
+                    src={data.user.profilePic}
+                    alt={data.title}
+                    className="h-12 w-12 rounded-full"
+                  />
+                  <h3 className="text-xl uppercase font-bold">
+                    {data.user.username} <br />
+                    <span className="text-sm font-normal lowercase">
+                      {data.user.email}
+                    </span>
+                  </h3>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>followers: 0</span> <span>followings: 0</span>{" "}
+                </div>
+                <button className="px-4 py-2 text-white rounded-md border bg-blue-500">
+                  Follow
+                </button>
+              </div>
             </div>
           </div>
+          {openModal && (
+            <ImageModal
+              url={data.image}
+              setOpenModal={setOpenModal}
+              title={data.title}
+            />
+          )}
         </div>
       )}
     </>

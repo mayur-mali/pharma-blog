@@ -15,7 +15,7 @@ export default function MostRecentPost() {
   const { currentUser } = useContext(AuthContext);
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [editPost, setEditPost] = useState(false);
+
   const [contentLoading, setContentLoading] = useState(false);
   const [lastIndex, setLastIndex] = useState(9);
   useEffect(() => {
@@ -24,7 +24,6 @@ export default function MostRecentPost() {
       try {
         // const data = await axiosInstance.get("/posts");
         const data1 = await axiosInstance.get("/blog");
-        console.log(data1.data);
         setPostData(data1.data);
         setLoading(false);
       } catch (error) {
@@ -34,8 +33,6 @@ export default function MostRecentPost() {
     };
     getPost();
   }, []);
-
-  const setEditPostData = async (data) => {};
 
   const deletePost = async (id) => {
     const user = currentUser._id;
