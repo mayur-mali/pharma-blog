@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 import heroimg from "../../static/assets/svg/flame-787.png";
-export default function SearchAndFilterSection() {
+export default function HeroSection() {
   const { currentUser } = useContext(AuthContext);
   return (
     <div>
@@ -36,9 +36,6 @@ export default function SearchAndFilterSection() {
               &rdquo;
             </span>
           </h2>
-          <p className="w-72 md:text-xl text-base dark:text-gray-600 text-gray-500 text-center font-medium">
-            Lorem ipsum dolor sit, amet consectetur adipisicing.
-          </p>
         </div>
       </div>
       <hr />

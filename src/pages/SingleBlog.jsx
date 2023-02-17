@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaShare } from "react-icons/fa";
-import { FcLike } from "react-icons/fc";
+import { FcLike, FcDislike } from "react-icons/fc";
 import { FiEdit3 } from "react-icons/fi";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { axiosInstance } from "../config";
@@ -24,6 +24,7 @@ export default function SingleBlog() {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [like, setLike] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   useTitle(slug);
   useEffect(() => {
@@ -42,10 +43,15 @@ export default function SingleBlog() {
     getPost();
   }, [id, slug]);
 
+  useEffect(() => {
+    setLike(data.likes?.includes(currentUser._id));
+  }, [like]);
   const imageModal = (url) => {
     setOpenModal(true);
   };
 
+  console.log(data.likes?.includes(currentUser._id));
+  //const likeToggle = () => {};
   return (
     <>
       {loading ? (
@@ -90,8 +96,23 @@ export default function SingleBlog() {
                           </Link>
                         </div>
                       )}
-                      <div className="p-3 rounded-full bg-white bg-opacity-90">
-                        <FcLike className="text-xl" />
+                      <div
+                        className="p-3 rounded-full cursor-pointer bg-white bg-opacity-90"
+                        onClick={() => setLike(!like)}
+                      >
+                        {like ? (
+                          <FcDislike
+                            className="text-xl"
+                            onClick={() => console.log("Dislike")}
+                          />
+                        ) : (
+                          <FcLike
+                            className="text-xl"
+                            onClick={() =>
+                              console.log(data.likes.includes(currentUser.id))
+                            }
+                          />
+                        )}
                       </div>
                     </div>
                     <div className="absolute md:hidden block left-5 bg-opacity-70 top-4 p-2 bg-white rounded-full">

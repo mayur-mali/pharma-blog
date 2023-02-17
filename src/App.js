@@ -15,7 +15,6 @@ import useTitle from "./customhooks/useTitle";
 import ScrollToTop from "./components/general/ScrollToTop";
 
 function App() {
-  useTitle("pharma blog app");
   const { currentUser } = useContext(AuthContext);
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/" />;
