@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import useTitle from "../customhooks/useTitle";
+
 import HeroSection from "../components/herosection/HeroSection";
 import FeaturedPost from "../components/herosection/FeaturedPost";
 import TodaysHighlight from "../components/herosection/TodaysHighlight";

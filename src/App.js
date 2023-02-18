@@ -10,7 +10,6 @@ import SingleBlog from "./pages/SingleBlog";
 import CreatePost from "./pages/CreatePost";
 import EditPost from "./components/herosection/EditPost";
 import Footer from "./components/general/Footer";
-import useTitle from "./customhooks/useTitle";
 
 import ScrollToTop from "./components/general/ScrollToTop";
 
