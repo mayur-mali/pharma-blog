@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import useTitle from "../customhooks/useTitle";
-import SearchAndFilterSection from "../components/herosection/SearchAndFilterSection";
+
+import HeroSection from "../components/herosection/HeroSection";
 import FeaturedPost from "../components/herosection/FeaturedPost";
 import TodaysHighlight from "../components/herosection/TodaysHighlight";
 import MostRecentPost from "../components/herosection/MostRecentPost";
@@ -8,11 +8,10 @@ import CreateNewPostBtn from "../components/general/CreateNewPostBtn";
 import { AuthContext } from "../context/AuthContext";
 
 export default function Blogs() {
-  useTitle("blogs");
   const { currentUser } = useContext(AuthContext);
   return (
     <>
-      <SearchAndFilterSection />
+      <HeroSection />
       <div className="py-4 px-6 max-w-7xl mx-auto w-full">
         <FeaturedPost />
       </div>

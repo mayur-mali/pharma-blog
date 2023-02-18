@@ -4,7 +4,7 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import SectionsTitle from "../general/SectionsTitle";
-import EditPost from "../herosection/EditPost";
+
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import "@animxyz/core";
 import { XyzTransition } from "@animxyz/react";

@@ -6,9 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../context/AuthContext";
 
-import { GoogleLogin } from "@react-oauth/google";
-
-import jwt_decode from "jwt-decode";
 import useTitle from "../customhooks/useTitle";
 import { axiosInstance } from "../config";
 

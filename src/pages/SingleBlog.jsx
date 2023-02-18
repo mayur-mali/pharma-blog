@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaShare } from "react-icons/fa";
-import { FcLike } from "react-icons/fc";
+import { FcLike, FcDislike } from "react-icons/fc";
 import { FiEdit3 } from "react-icons/fi";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { axiosInstance } from "../config";
@@ -24,6 +24,8 @@ export default function SingleBlog() {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [islike, setIslike] = useState(false);
+  const [likesLoading, setLikeloading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   useTitle(slug);
   useEffect(() => {
@@ -42,8 +44,25 @@ export default function SingleBlog() {
     getPost();
   }, [id, slug]);
 
+  useEffect(() => {
+    setIslike(data.likes?.includes(currentUser._id));
+  }, [data.likes, currentUser._id]);
   const imageModal = (url) => {
     setOpenModal(true);
+  };
+
+  const likeToggle = async () => {
+    setLikeloading(true);
+    try {
+      await axiosInstance.put(`blog/like/${data._id}`, {
+        userId: currentUser._id,
+      });
+      setLikeloading(false);
+    } catch (err) {
+      console.log(err.massage);
+      setLikeloading(false);
+    }
+    setIslike(!islike);
   };
 
   return (
@@ -90,9 +109,24 @@ export default function SingleBlog() {
                           </Link>
                         </div>
                       )}
-                      <div className="p-3 rounded-full bg-white bg-opacity-90">
-                        <FcLike className="text-xl" />
-                      </div>
+                      {currentUser?._id !== data.user._id && (
+                        <div
+                          className="p-3 rounded-full cursor-pointer bg-white bg-opacity-90"
+                          onClick={likeToggle}
+                        >
+                          {likesLoading ? (
+                            <AiOutlineLoading3Quarters className="animate-spin" />
+                          ) : (
+                            <>
+                              {islike ? (
+                                <FcDislike className="text-xl" />
+                              ) : (
+                                <FcLike className="text-xl" />
+                              )}
+                            </>
+                          )}
+                        </div>
+                      )}
                     </div>
                     <div className="absolute md:hidden block left-5 bg-opacity-70 top-4 p-2 bg-white rounded-full">
                       <Link to="/">
@@ -143,7 +177,7 @@ export default function SingleBlog() {
                   </h3>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span>followers: 0</span> <span>followings: 0</span>{" "}
+                  <span>followers: 0</span>
                 </div>
                 <button className="px-4 py-2 text-white rounded-md border bg-blue-500">
                   Follow
