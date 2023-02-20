@@ -19,6 +19,7 @@ export default function EditPost() {
   const { currentUser } = useContext(AuthContext);
   const nevigate = useNavigate();
   const [coverPic, setCoverPic] = useState(null);
+
   // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [getPostValues, setPostValue] = useState([]);

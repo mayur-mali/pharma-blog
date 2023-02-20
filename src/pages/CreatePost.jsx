@@ -17,6 +17,8 @@ export default function CreateNewPost() {
   const [file, setFile] = useState(null);
   const [converImgurl, setConverImgurl] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [tags, setTags] = useState([]);
+  const [tagValue, setTagValue] = useState("");
 
   useEffect(() => {
     if (file) {
@@ -67,6 +69,15 @@ export default function CreateNewPost() {
       .catch((error) => {
         console.log(error);
       });
+  };
+  const handleAddTags = (e) => {
+    e.preventDefault();
+    if (tags.length < 4) {
+      setTags([...tags, tagValue]);
+      setTagValue("");
+    } else {
+      alert("you can only add 4 tags");
+    }
   };
 
   return (
@@ -147,6 +158,26 @@ export default function CreateNewPost() {
             placeholder="Blog title here..."
             onChange={(e) => setTitle(e.target.value)}
           />
+        </div>
+        <div>
+          <form onSubmit={handleAddTags}>
+            <input
+              type="text"
+              name="postname"
+              className="focus:outline-none bg-transparent text-white capitalize sm:text-3xl text-xl md:w-3/4 w-full py-2"
+              placeholder="tags.."
+              value={tagValue}
+              onChange={(e) => setTagValue(e.target.value)}
+            />
+
+            <ul className="flex space-x-1">
+              {tags?.map((tag, index) => (
+                <li key={index} className="px-2 py-1 bg-white text-black">
+                  {tag} <span className="ml-2">x</span>
+                </li>
+              ))}
+            </ul>
+          </form>
         </div>
 
         <div>

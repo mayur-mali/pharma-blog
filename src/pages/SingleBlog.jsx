@@ -98,7 +98,7 @@ export default function SingleBlog() {
                         />
                       </>
                     )}
-                    <div className="right-5 space-x-3 flex items-center justify-between -bottom-4 absolute">
+                    <div className="right-5 space-x-3 flex items-center  -bottom-4 absolute">
                       <div className="p-3 rounded-full bg-white bg-opacity-90">
                         <FaShare className="text-xl text-gray-800" />
                       </div>
