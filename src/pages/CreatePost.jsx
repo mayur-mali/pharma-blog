@@ -80,6 +80,10 @@ export default function CreateNewPost() {
     }
   };
 
+  const handleDeleteTag = (id) => {
+    setTags(tags.filter((tag) => tag !== id));
+  };
+
   return (
     <div className="w-full font-workSans bg-slate-900 min-h-screen h-auto py-3 relative">
       <div className="max-w-7xl p-4 mx-auto">
@@ -150,7 +154,7 @@ export default function CreateNewPost() {
           )}
         </div>
 
-        <div className="my-8 flex md:flex-row flex-col items-center">
+        <div className="mb-2 mt-4 flex md:flex-row flex-col items-center">
           <input
             type="text"
             name="postname"
@@ -164,7 +168,7 @@ export default function CreateNewPost() {
             <input
               type="text"
               name="postname"
-              className="focus:outline-none bg-transparent text-white capitalize sm:text-3xl text-xl md:w-3/4 w-full py-2"
+              className="focus:outline-none mb-2 bg-transparent text-white capitalize sm:text-3xl text-xl md:w-3/4 w-full py-2"
               placeholder="tags.."
               value={tagValue}
               onChange={(e) => setTagValue(e.target.value)}
@@ -172,8 +176,17 @@ export default function CreateNewPost() {
 
             <ul className="flex space-x-1">
               {tags?.map((tag, index) => (
-                <li key={index} className="px-2 py-1 bg-white text-black">
-                  {tag} <span className="ml-2">x</span>
+                <li
+                  key={index}
+                  className="p-2 px-4  rounded-full bg-white text-black"
+                >
+                  {tag}{" "}
+                  <span
+                    className="ml-3 text-xl cursor-pointer"
+                    onClick={() => handleDeleteTag(tag)}
+                  >
+                    x
+                  </span>
                 </li>
               ))}
             </ul>
@@ -181,7 +194,7 @@ export default function CreateNewPost() {
         </div>
 
         <div>
-          <Suneditor title={title} coverurl={converImgurl} />
+          <Suneditor title={title} coverurl={converImgurl} tags={tags} />
         </div>
       </div>
     </div>
