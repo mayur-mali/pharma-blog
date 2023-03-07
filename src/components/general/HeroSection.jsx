@@ -5,14 +5,10 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { AuthContext } from "../../context/AuthContext";
 
-import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
-
 export default function HeroSection() {
-  const { dispatch, currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
   useTitle("welcome to pharmacy blog");
-  const nevigate = useNavigate();
 
   return (
     <div className="h-full  flex justify-center flex-col items-center">
@@ -47,23 +43,7 @@ export default function HeroSection() {
             </div>
           ) : (
             <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-              <div className="rounded-md shadow">
-                <GoogleLogin
-                  theme="filled_black"
-                  size="large"
-                  onSuccess={(credentialResponse) => {
-                    const token = credentialResponse.credential;
-                    var decoded = jwt_decode(token);
-                    //console.log(decoded);
-                    dispatch({ type: "LOGIN", payload: decoded });
-                    localStorage.setItem("isLogin", true);
-                    nevigate("/blogs");
-                  }}
-                  onError={() => {
-                    console.log("Login Failed");
-                  }}
-                />
-              </div>
+              <div className="rounded-md shadow"></div>
             </div>
           )}
         </div>

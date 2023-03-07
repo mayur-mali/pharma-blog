@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { googleLogout } from "@react-oauth/google";
+
 import logoImg from "../../static/assets/png/LOGO2.png";
 import "@animxyz/core";
 import { XyzTransition } from "@animxyz/react";
@@ -16,7 +16,6 @@ export default function Nav() {
   const [searchMenu, setSearchMenu] = useState(false);
 
   const logout = () => {
-    googleLogout();
     dispatch({ type: "LOGOUT" });
     localStorage.clear();
     nevigate("/");
