@@ -9,6 +9,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import "@animxyz/core";
 import { XyzTransition } from "@animxyz/react";
 import { AuthContext } from "../../context/AuthContext";
+import Tag from "../general/Tag";
 export default function MostRecentPost() {
   var localizedFormat = require("dayjs/plugin/localizedFormat");
   dayjs.extend(localizedFormat);
@@ -155,12 +156,9 @@ export default function MostRecentPost() {
                         </div>
 
                         <div className="text-xs mb-3 space-x-2 ">
-                          <span className="bg-white text-black rounded-md p-1.5">
-                            #pharma
-                          </span>
-                          <span className="bg-white text-black rounded-md p-1.5">
-                            #pharma
-                          </span>
+                          {post.tags?.map((tag, i) => (
+                            <Tag tag={tag} key={i} />
+                          ))}
 
                           <h2 className="text-white mt-4 font-extrabold capitalize  md:text-xl text-lg overflow-hidden line-clamp-2">
                             {post.title}

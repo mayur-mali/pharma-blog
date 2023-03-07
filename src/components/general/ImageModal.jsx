@@ -24,7 +24,7 @@ export default function ImageModal({ url, title, setOpenModal }) {
         <img
           src={url}
           alt={title}
-          className="h-full object-cover max-w-xl w-full mx-auto"
+          className="h-full object-contain mb-4 w-full mx-auto"
         />
       </div>
     </div>

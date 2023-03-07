@@ -10,8 +10,11 @@ import SingleBlog from "./pages/SingleBlog";
 import CreatePost from "./pages/CreatePost";
 import EditPost from "./components/herosection/EditPost";
 import Footer from "./components/general/Footer";
-
+import CommingSoon from "./components/general/CommingSoon.jsx";
 import ScrollToTop from "./components/general/ScrollToTop";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -65,7 +68,20 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<CommingSoon />} />
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

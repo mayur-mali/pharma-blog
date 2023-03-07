@@ -45,8 +45,8 @@ export default function SingleBlog() {
   }, [id, slug]);
 
   useEffect(() => {
-    setIslike(data.likes?.includes(currentUser._id));
-  }, [data.likes, currentUser._id]);
+    setIslike(data.likes?.includes(currentUser?._id));
+  }, [data.likes, currentUser?._id]);
   const imageModal = (url) => {
     setOpenModal(true);
   };
@@ -109,23 +109,27 @@ export default function SingleBlog() {
                           </Link>
                         </div>
                       )}
-                      {currentUser?._id !== data.user._id && (
-                        <div
-                          className="p-3 rounded-full cursor-pointer bg-white bg-opacity-90"
-                          onClick={likeToggle}
-                        >
-                          {likesLoading ? (
-                            <AiOutlineLoading3Quarters className="animate-spin" />
-                          ) : (
-                            <>
-                              {islike ? (
-                                <FcDislike className="text-xl" />
+                      {currentUser && (
+                        <>
+                          {currentUser?._id !== data.user._id && (
+                            <div
+                              className="p-3 rounded-full cursor-pointer bg-white bg-opacity-90"
+                              onClick={likeToggle}
+                            >
+                              {likesLoading ? (
+                                <AiOutlineLoading3Quarters className="animate-spin" />
                               ) : (
-                                <FcLike className="text-xl" />
+                                <>
+                                  {islike ? (
+                                    <FcDislike className="text-xl" />
+                                  ) : (
+                                    <FcLike className="text-xl" />
+                                  )}
+                                </>
                               )}
-                            </>
+                            </div>
                           )}
-                        </div>
+                        </>
                       )}
                     </div>
                     <div className="absolute md:hidden block left-5 bg-opacity-70 top-4 p-2 bg-white rounded-full">

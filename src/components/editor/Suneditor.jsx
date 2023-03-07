@@ -30,6 +30,7 @@ export default function Suneditor(props) {
         body: content,
         image: props.coverurl,
         user: currentUser._id,
+        tags: props.tags,
       });
 
       setTimeout(() => {
@@ -41,6 +42,7 @@ export default function Suneditor(props) {
       setLoding(false);
     }
   };
+
   return (
     <>
       <div className="my-5 text-white text-right space-x-3">
