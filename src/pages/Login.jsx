@@ -8,13 +8,14 @@ import { AuthContext } from "../context/AuthContext";
 
 import useTitle from "../customhooks/useTitle";
 import { axiosInstance } from "../config";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const { dispatch, isFetching } = useContext(AuthContext);
 
   useTitle("Log in");
   const nevigate = useNavigate();
-  const [error, setError] = useState("");
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -36,7 +37,8 @@ export default function Login() {
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
       nevigate("/");
     } catch (err) {
-      setError("something went wrong");
+      toast(err.response.data);
+
       dispatch({ type: "LOGIN_FAILURE" });
       setUser({
         email: "",
@@ -102,11 +104,7 @@ export default function Login() {
                 Password
               </label>
             </div>
-            {error && (
-              <div className="flex py-2 justify-center capitalize w-full text-red-500 items-center relative ">
-                <p>{error} </p>
-              </div>
-            )}
+
             <button
               type="submit"
               className="w-full flex mt-6 disabled:bg-gray-400 justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

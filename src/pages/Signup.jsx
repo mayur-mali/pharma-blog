@@ -7,11 +7,12 @@ import { Link, useNavigate } from "react-router-dom";
 import useTitle from "../customhooks/useTitle";
 import { useState } from "react";
 import { axiosInstance } from "../config";
+import { toast } from "react-toastify";
 
 export default function Signup() {
   useTitle("Sign up");
   const nevigate = useNavigate();
-  const [error, setError] = useState("");
+
   const [isLoading, setLoading] = useState(false);
   const [user, setUser] = useState({
     fname: "",
@@ -39,15 +40,15 @@ export default function Signup() {
           password: user.password,
           profilePic: `https://ui-avatars.com/api/?name=${user.fname}+${user.lname}`,
         });
+        toast(`Welcome ${user.fname} ${user.lname}`);
         setLoading(false);
         nevigate("/login");
       } else {
         setLoading(false);
-        setError("password is not match");
       }
     } catch (error) {
+      toast(error.response.data);
       setLoading(false);
-      setError("something went wrong");
     }
   };
 
@@ -167,11 +168,7 @@ export default function Signup() {
                 Confirm Password
               </label>
             </div>
-            {error && (
-              <div className="flex py-2 justify-center capitalize w-full text-red-500 items-center relative ">
-                <p>{error} </p>
-              </div>
-            )}
+
             <button
               type="submit"
               className="w-full flex disabled:bg-gray-400 justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

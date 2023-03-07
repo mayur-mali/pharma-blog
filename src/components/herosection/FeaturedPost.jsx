@@ -7,6 +7,7 @@ import "swiper/css";
 import { Navigation } from "swiper";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import Tag from "../general/Tag";
 export default function FeaturedPost() {
   var relativeTime = require("dayjs/plugin/relativeTime");
   dayjs.extend(relativeTime);
@@ -105,15 +106,17 @@ export default function FeaturedPost() {
                               )}
                             </div>
                             <div className="absolute w-full flex justify-start items-end h-full top-0 bg-black bg-opacity-20">
-                              <div className="bg-black p-4 bg-opacity-30 w-full md:h-40 h-28">
+                              <div className="bg-black space-y-2 p-4 bg-opacity-30 w-full md:h-40 h-28">
                                 <Link to={`/blog/${post._id}/${post.slug}`}>
                                   <h2 className="text-white 	font-extrabold  w-full capitalize  md:text-3xl text-lg md:line-clamp-2">
                                     {post.title}
                                   </h2>
                                 </Link>
-                                <span className="text-slate-900">
-                                  #pharmacy
-                                </span>
+                                <div className="space-x-2">
+                                  {post.tags?.map((tag, i) => (
+                                    <Tag tag={tag} key={i} />
+                                  ))}
+                                </div>
                               </div>
                             </div>
                           </div>

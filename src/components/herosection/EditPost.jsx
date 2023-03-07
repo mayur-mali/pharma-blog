@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
 import { useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { axiosInstance } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
 import SunEditor from "suneditor-react";
+import "suneditor/dist/css/suneditor.min.css";
 import { useEffect } from "react";
 
 import {
@@ -109,9 +110,12 @@ export default function EditPost() {
   };
 
   return (
-    <div className="flex justify-center items-center h-full">
-      <div className="max-w-lg mx-auto w-full py-10 bg-white">
-        <div className="py-8 bg-gray-50 text-black border rounded-lg w-full">
+    <div className="flex justify-center items-center flex-col h-full">
+      <button className="px-4 py-2 bg-blue-100 rounded-md ml-8 self-start text-black font-workSans">
+        <Link to="/">Back</Link>
+      </button>
+      <div className="max-w-xl mx-auto w-full py-10 bg-white">
+        <div className="py-8 bg-gray-50 text-black md:border rounded-lg w-full">
           <form
             className="flex  flex-col px-8 space-y-6"
             onSubmit={(e) => editPost(e)}
@@ -127,8 +131,9 @@ export default function EditPost() {
             />
 
             <SunEditor
-              setDefaultStyle="font-size: 30px;"
               placeholder="write your post content here..."
+              appendContents={getPostValues.body}
+              setDefaultStyle="font-size: 30px;"
               onChange={handleOnChange}
               setOptions={{
                 height: "auto",
@@ -152,14 +157,15 @@ export default function EditPost() {
             />
             <div className="float-right">
               {coverPic ? (
-                <span onClick={deleteCoverimg}>
+                <span className="flex cursor-pointer" onClick={deleteCoverimg}>
+                  REMOVE IMAGE
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6 cursor-pointer"
+                    className="w-6 h-6 ml-2"
                   >
                     <path
                       strokeLinecap="round"
